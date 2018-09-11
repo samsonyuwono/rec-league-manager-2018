@@ -6,6 +6,15 @@ var bodyParser = require("body-parser");
 
 var team = require("./routes/team");
 var app = express();
+var mongoose = require("mongoose");
+mongoose.Promise = require("bluebird");
+mongoose
+  .connect(
+    "mongodb://localhost/rec-league-manager-2018",
+    { promiseLibrary: require("bluebird") }
+  )
+  .then(() => console.log("connection succesful"))
+  .catch(err => console.error(err));
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
