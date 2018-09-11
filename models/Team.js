@@ -5,7 +5,6 @@ var TeamSchema = new mongoose.Schema({
   wins: Number,
   losses: Number,
   logo_url: String,
-  created_date: { type: Date },
   updated_date: { type: Date, default: Date.now }
 });
 
