@@ -51,6 +51,7 @@ class App extends Component {
             <table class="table table-stripe">
               <thead>
                 <tr>
+                  <th>Test</th>
                   <th>Name</th>
                   <th>Wins</th>
                   <th>Losses</th>
