@@ -50,7 +50,7 @@ class TeamBox extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <div className="comments">
+            <div className="teams">
               <h2>Teams:</h2>
               <TeamList data={DATA} />
             </div>

@@ -1,11 +1,13 @@
 var mongoose = require("mongoose");
 
-var TeamSchema = new mongoose.Schema({
-  name: String,
-  wins: Number,
-  losses: Number,
-  logo_url: String,
-  updated_date: { type: Date, default: Date.now }
-});
+var TeamSchema = new mongoose.Schema(
+  {
+    name: String,
+    wins: Number,
+    losses: Number,
+    logo_url: String
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model("Team", TeamSchema);
+export default mongoose.model("Team", TeamSchema);
