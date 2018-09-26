@@ -17,7 +17,7 @@ const TeamForm = props => (
       name="wins"
       placeholder="Wins"
       value={props.wins}
-      onChange={props.handleTextChange}
+      onChange={props.handleOnChange}
     />
     <label htmlFor="losses">Losses:</label>
     <input
@@ -25,7 +25,7 @@ const TeamForm = props => (
       name="losses"
       placeholder="Losses"
       value={props.losses}
-      onChange={this.handleOnChange}
+      onChange={props.handleOnChange}
     />
     <label htmlFor="logo_url">Logo url:</label>
     <input
@@ -33,7 +33,7 @@ const TeamForm = props => (
       name="logo_url"
       placeholder="insert your logo url"
       value={props.logo_url}
-      onChange={this.handleOnChange}
+      onChange={props.handleOnChange}
     />
     <button type="submit">Submit</button>
   </form>

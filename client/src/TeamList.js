@@ -5,34 +5,16 @@ import Team from "./Team";
 
 const TeamList = props => {
   const teamNodes = props.data.map(team => (
-    <Team name={team.name} key={team._id} id={team._id}>
+    <Team
+      name={team.name}
+      key={team._id}
+      id={team._id}
+      timestamp={team.updatedAt}
+    >
       {team.wins} - {team.losses}
     </Team>
   ));
-  return (
-    <div className="panel-body">
-      <table className="table table-stripe">
-        <thead>
-          <tr>
-            <th>Test</th>
-            <th>Name</th>
-            <th>Wins</th>
-            <th>Losses</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <Link to={teamNodes} />
-            </td>
-            <td>{teamNodes}</td>
-            <td>{teamNodes}</td>
-            <td>{teamNodes}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
+  return <div className="panel-body">{teamNodes}</div>;
 };
 
 TeamList.propTypes = {

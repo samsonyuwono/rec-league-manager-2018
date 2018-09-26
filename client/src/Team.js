@@ -13,7 +13,8 @@ const Team = props => (
     <div className="teamContent">
       <div className="singleTeamContent">
         <h3>{props.name}</h3>
-        <ReactMarkdown source={props.children} />
+        <h3>{props.wins}</h3>
+        <h3>{props.losses}</h3>
       </div>
       <div className="singleCommentButtons" />
     </div>

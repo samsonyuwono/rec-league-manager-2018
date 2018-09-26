@@ -29,6 +29,15 @@ router.get("/teams", (req, res) => {
   });
 });
 
+router.get("/teams/:id", (req, res) => {
+  Team.findById(req.params.id).then(id => {
+    if (!id) {
+      return res.json({ success: false, error: "No team id provided" });
+    }
+    return res.status(200).json(id);
+  });
+});
+
 router.post("/teams", (req, res) => {
   const team = new Team();
   const { name, wins, losses, logo_url } = req.body;
@@ -36,7 +45,7 @@ router.post("/teams", (req, res) => {
   if (!name || !wins || !losses || !logo_url) {
     return res.json({
       success: false,
-      error: "You must complete the form properly"
+      error: "You forgot to fill in a section"
     });
   }
   team.name = name;
@@ -48,6 +57,43 @@ router.post("/teams", (req, res) => {
     return res.json({ success: true });
   });
 });
+
+router.put("/teams/:teamId", (req, res) => {
+  Team.findById(
+    {
+      _id: req.params.id
+    },
+    (error, team) => {
+      if (error) return res.json({ success: false, error });
+      const { name, wins, losses, logo_url } = req.body;
+      if (name) team.name = name;
+      if (wins) team.wins = wins;
+      if (losses) team.losses = losses;
+      if (logo_url) team.logo_url = logo_url;
+
+      team.save(error => {
+        if (error) return res.json({ success: false, error });
+        return res.json({ success: true });
+      });
+    }
+  );
+});
+
+router.delete("/teams/:id", (req, res) => {
+  Team.remove(
+    {
+      _id: req.params.id
+    },
+    (error, team) => {
+      if (error) return res.json({ success: false, error: "Doesn't work" });
+      return res.json({
+        success: true,
+        message: " Team successfully removed!"
+      });
+    }
+  );
+});
+
 app.use("/api", router);
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));

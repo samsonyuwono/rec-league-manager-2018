@@ -19,6 +19,36 @@ class TeamBox extends Component {
     this.pollInterval = null;
   }
 
+  handleOnChange = e => {
+    const newState = { ...this.state };
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  };
+
+  handleTeamSubmit = e => {
+    e.preventDefault();
+    const { name, wins, losses, logo_url } = this.state;
+    if (!name || !wins || !losses || !logo_url) return;
+    fetch("/api/teams", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, wins, losses, logo_url })
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (!res.sucess)
+          this.setState({ error: res.error.message || res.error });
+        else
+          this.setState({
+            name: "",
+            wins: 0,
+            losses: 0,
+            logo_url: "",
+            error: null
+          });
+      });
+  };
+
   componentDidMount() {
     this.loadTeamsFromServer();
     if (!this.pollInterval) {
@@ -80,7 +110,14 @@ class TeamBox extends Component {
           </div>
         </div>
         <div className="form">
-          <TeamForm name={this.state.team} wins={this.state.wins} />
+          <TeamForm
+            name={this.state.name}
+            wins={this.state.wins}
+            losses={this.state.losses}
+            logo_url={this.state.logo_url}
+            handleOnChange={this.handleOnChange}
+            handleSubmit={this.handleTeamSubmit}
+          />
         </div>
         {this.state.error && <p>{this.state.error}</p>}
       </div>
