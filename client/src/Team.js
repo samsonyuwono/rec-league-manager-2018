@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import PropTypes from "prop-types";
 import ReactMarkdown from "react-markdown";
 
@@ -12,19 +13,40 @@ const Team = props => (
     />
     <div className="teamContent">
       <div className="singleTeamContent">
-        <h3>{props.name}</h3>
+        <h3>{props.wins}</h3>
         <h3>{props.wins}</h3>
         <h3>{props.losses}</h3>
       </div>
-      <div className="singleCommentButtons" />
+      <div className="singleTeamButtons">
+        <span className="time">{moment(props.timestamp).fromNow()}</span>
+        <button>
+          <a
+            onClick={() => {
+              props.handleUpdateTeam(props.id);
+            }}
+          >
+            update
+          </a>
+        </button>
+        <button>
+          <a
+            onClick={() => {
+              props.handleDeleTeam(props.id);
+            }}
+          >
+            delete
+          </a>
+        </button>
+      </div>
     </div>
   </div>
 );
 
 Team.propTypes = {
   name: PropTypes.string.isRequired,
-  logo_url: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
+  handleUpdateTeam: PropTypes.func.isRequired,
+  handleDeleteTeam: PropTypes.func.isRequired,
   timestamp: PropTypes.string.isRequired
 };
 

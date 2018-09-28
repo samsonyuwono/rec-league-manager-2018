@@ -9,7 +9,12 @@ const TeamList = props => {
       name={team.name}
       key={team._id}
       id={team._id}
+      wins={team.wins}
+      losses={team.losses}
+      logo_url={team.logo_url}
       timestamp={team.updatedAt}
+      handleUpdateTeam={props.handleUpdateTeam}
+      handleDeleteTeam={props.handleDeleteTeam}
     >
       {team.wins} - {team.losses}
     </Team>
@@ -24,7 +29,8 @@ TeamList.propTypes = {
       names: PropTypes.string,
       wins: PropTypes.number,
       losess: PropTypes.number,
-      logo_url: PropTypes.string
+      logo_url: PropTypes.string,
+      updatedAt: PropTypes.string
     })
   )
 };
