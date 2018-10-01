@@ -10,7 +10,7 @@ const data = [
   },
   {
     _id: 2,
-    names: "Lakers",
+    names: "Blazers",
     wins: 40,
     losses: 42,
     logo_url: "www.lakers.com",

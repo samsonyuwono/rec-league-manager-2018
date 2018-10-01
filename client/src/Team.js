@@ -13,9 +13,8 @@ const Team = props => (
     />
     <div className="teamContent">
       <div className="singleTeamContent">
-        <h3>{props.wins}</h3>
-        <h3>{props.wins}</h3>
-        <h3>{props.losses}</h3>
+        <h3>{props.name}</h3>
+        <h3>{props.children}</h3>
       </div>
       <div className="singleTeamButtons">
         <span className="time">{moment(props.timestamp).fromNow()}</span>
@@ -31,7 +30,7 @@ const Team = props => (
         <button>
           <a
             onClick={() => {
-              props.handleDeleTeam(props.id);
+              props.handleDeleteTeam(props.id);
             }}
           >
             delete

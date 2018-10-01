@@ -7,7 +7,6 @@ import Team from "./models/team";
 
 var app = express();
 const router = express.Router();
-
 const API_PORT = process.env.API_PORT || 3001;
 
 mongoose.connect(getSecret("dbUri"));
@@ -41,7 +40,6 @@ router.get("/teams/:id", (req, res) => {
 router.post("/teams", (req, res) => {
   const team = new Team();
   const { name, wins, losses, logo_url } = req.body;
-
   if (!name || !wins || !losses || !logo_url) {
     return res.json({
       success: false,
@@ -58,26 +56,39 @@ router.post("/teams", (req, res) => {
   });
 });
 
-router.put("/teams/:teamId", (req, res) => {
-  Team.findById(
-    {
-      _id: req.params.id
-    },
-    (error, team) => {
+router.put("/teams/:id", (req, res) => {
+  Team.findById(req.params.id, (error, team) => {
+    if (error) return res.json({ success: false, error });
+    const { name, wins, losses, logo_url } = req.body;
+    if (name) team.name = name;
+    if (wins) team.wins = wins;
+    if (losses) team.losses = losses;
+    if (logo_url) team.logo_url = logo_url;
+    team.save(error => {
       if (error) return res.json({ success: false, error });
-      const { name, wins, losses, logo_url } = req.body;
-      if (name) team.name = name;
-      if (wins) team.wins = wins;
-      if (losses) team.losses = losses;
-      if (logo_url) team.logo_url = logo_url;
-
-      team.save(error => {
-        if (error) return res.json({ success: false, error });
-        return res.json({ success: true });
-      });
-    }
-  );
+      return res.json({ success: true });
+    });
+  });
 });
+
+// router.put("/teams/:id", (req, res) => {
+//   Team.findById(  {
+//       _id: req.params.id
+//     }, (error, team) {
+//     console.log(team);
+//     team.name = req.body.team;
+//     team.wins = req.body.team;
+//     team.losses = req.body.team;
+//     team.logo_url = req.body.team;
+//     team.save(function(err) {
+//       if (err) {
+//         console.log("err", err);
+//       }
+//       res.status(200).json("ok");
+//       console.log("updated");
+//     });
+//   });
+// });
 
 router.delete("/teams/:id", (req, res) => {
   Team.remove(

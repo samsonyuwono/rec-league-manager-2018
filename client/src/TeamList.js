@@ -32,7 +32,9 @@ TeamList.propTypes = {
       logo_url: PropTypes.string,
       updatedAt: PropTypes.string
     })
-  )
+  ),
+  handleDeleteTeam: PropTypes.func.isRequired,
+  handleUpdateTeam: PropTypes.func.isRequired
 };
 
 TeamList.defaultProps = {
