@@ -132,6 +132,20 @@ router.get("/players/:id", (req, res) => {
 // PUT /players/{:id} - updates a player by id with data specified in the request body
 
 // DELETE /players/{:id} - removes player by id
+router.delete("/players/:id", (req, res) => {
+  Player.remove(
+    {
+      _id: req.params.id
+    },
+    (error, team) => {
+      if (error) return res.json({ success: false, error: "Doesn't work" });
+      return res.json({
+        success: true,
+        message: " Player successfully removed!"
+      });
+    }
+  );
+});
 
 app.use("/api", router);
 
