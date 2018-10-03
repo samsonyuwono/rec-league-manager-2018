@@ -81,13 +81,27 @@ class TeamBox extends Component {
     const { name, wins, losses, logo_url } = this.state;
     const data = [
       ...this.state.data,
-      { name, wins, losses, logo_url, _id: Date.now().toString() }
+      {
+        name,
+        wins,
+        losses,
+        logo_url,
+        _id: Date.now().toString(),
+        updateAt: new Date(),
+        createdAt: new Date()
+      }
     ];
+    debugger;
     this.setState({ data });
     fetch("/api/teams", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, wins, losses, logo_url })
+      body: JSON.stringify({
+        name,
+        wins,
+        losses,
+        logo_url
+      })
     })
       .then(res => res.json())
       .then(res => {
@@ -134,6 +148,7 @@ class TeamBox extends Component {
         else this.setState({ data: res.data });
       });
   };
+
   render() {
     return (
       <div className="container">

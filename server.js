@@ -5,7 +5,8 @@ import mongoose from "mongoose";
 import { getSecret } from "./secrets";
 import Team from "./models/team";
 
-var app = express();
+var cors = require("cors");
+var app = express().use("*", cors());
 const router = express.Router();
 const API_PORT = process.env.API_PORT || 3001;
 
@@ -70,25 +71,6 @@ router.put("/teams/:id", (req, res) => {
     });
   });
 });
-
-// router.put("/teams/:id", (req, res) => {
-//   Team.findById(  {
-//       _id: req.params.id
-//     }, (error, team) {
-//     console.log(team);
-//     team.name = req.body.team;
-//     team.wins = req.body.team;
-//     team.losses = req.body.team;
-//     team.logo_url = req.body.team;
-//     team.save(function(err) {
-//       if (err) {
-//         console.log("err", err);
-//       }
-//       res.status(200).json("ok");
-//       console.log("updated");
-//     });
-//   });
-// });
 
 router.delete("/teams/:id", (req, res) => {
   Team.remove(
