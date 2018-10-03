@@ -4,6 +4,7 @@ import logger from "morgan";
 import mongoose from "mongoose";
 import { getSecret } from "./secrets";
 import Team from "./models/team";
+import Player from "./models/player";
 
 var cors = require("cors");
 var app = express().use("*", cors());
@@ -86,6 +87,8 @@ router.delete("/teams/:id", (req, res) => {
     }
   );
 });
+
+//Player routes
 
 app.use("/api", router);
 
