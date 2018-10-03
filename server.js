@@ -90,6 +90,49 @@ router.delete("/teams/:id", (req, res) => {
 
 //Player routes
 
+//GET /teams{:id}/players - returns all players in team
+
+// GET /players - returns all players
+router.get("/players", (req, res) => {
+  Player.find((err, players) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: players });
+  });
+});
+
+// POST /players - creates new player with data specified in the request body
+router.post("/players", (req, res) => {
+  const player = new Player();
+  const { name, height, weight, image_url } = req.body;
+  if (!name || !height || !weight || !image_url) {
+    return res.json({
+      success: false,
+      error: "You forgot to fill in a section"
+    });
+  }
+  player.name = name;
+  player.height = height;
+  player.weight = weight;
+  player.image_url = image_url;
+  player.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+// GET /players/{:id} - returns a player with given id
+router.get("/players/:id", (req, res) => {
+  Player.findById(req.params.id).then(id => {
+    if (!id) {
+      return res.json({ success: false, error: "No player id provided" });
+    }
+    return res.status(200).json(id);
+  });
+});
+
+// PUT /players/{:id} - updates a player by id with data specified in the request body
+
+// DELETE /players/{:id} - removes player by id
+
 app.use("/api", router);
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
