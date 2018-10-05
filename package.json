@@ -31,7 +31,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
-    "start:server": "nodemon server.js --exec babel-node --presets es2015,stage-0",
+    "start:server": "nodemon ./routes/server.js --exec babel-node --presets es2015,stage-0",
     "start:client": "cd client && yarn start",
     "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\"",
     "build": "react-scripts build",

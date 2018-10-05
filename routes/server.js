@@ -2,9 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
 import mongoose from "mongoose";
-import { getSecret } from "./secrets";
-import Team from "./models/team";
-import Player from "./models/player";
+import { getSecret } from "../secrets";
+import Team from "../models/team";
+import Player from "../models/player";
 
 var cors = require("cors");
 var app = express().use("*", cors());
@@ -89,8 +89,6 @@ router.delete("/teams/:id", (req, res) => {
     }
   );
 });
-
-//Player routes
 
 router.get("/teams/:teamId/players", (req, res) => {
   Team.findById(req.params.teamId)
