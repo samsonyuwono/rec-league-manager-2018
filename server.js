@@ -9,7 +9,6 @@ import Player from "./models/player";
 var cors = require("cors");
 var app = express().use("*", cors());
 const router = express.Router();
-const playerRouter = express.Router({ mergeParams: true });
 const API_PORT = process.env.API_PORT || 3001;
 
 mongoose.connect(getSecret("dbUri"));
@@ -25,10 +24,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/teams", (req, res) => {
-  Team.find((err, teams) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, data: teams });
-  });
+  Team.find(req.params.id)
+    .populate("players")
+    .exec((err, teams) => {
+      if (err) return res.status(400).send(err);
+      res.json(teams);
+    });
 });
 
 router.get("/teams/:id", (req, res) => {
@@ -108,7 +109,7 @@ router.post("/teams/:id/players/", (req, res) => {
   Team.findOne({ _id: req.params.id }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));
-    console.log(team.players);
+    console.log(team.players[0]);
 
     Player.create(
       {
@@ -120,18 +121,18 @@ router.post("/teams/:id/players/", (req, res) => {
       (err, player) => {
         console.log(player);
         if (err) return res.status(400).send(err);
-        team.players.push(player._id);
-        // team.save(err => {
-        //   if (err) return res.status(400).send(err);
-        //
-        //   res.json(player);
-        // });
+        team.players.push(player);
+        team.save(err => {
+          if (err) return res.status(400).send(err);
+
+          res.json(player);
+        });
       }
     );
   });
 });
 // GET /players/{:id} - returns a player with given id
-playerRouter.get("/players/:id", (req, res) => {
+router.get("/players/:id", (req, res) => {
   Player.findById(req.params.id).then(id => {
     if (!id) {
       return res.json({ success: false, error: "No player id provided" });
@@ -143,7 +144,7 @@ playerRouter.get("/players/:id", (req, res) => {
 // PUT /players/{:id} - updates a player by id with data specified in the request body
 
 // DELETE /players/{:id} - removes player by id
-playerRouter.delete("/players/:id", (req, res) => {
+router.delete("/players/:id", (req, res) => {
   Player.remove(
     {
       _id: req.params.id
@@ -158,6 +159,6 @@ playerRouter.delete("/players/:id", (req, res) => {
   );
 });
 
-app.use("/api", router, playerRouter);
+app.use("/api", router);
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
