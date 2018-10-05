@@ -104,39 +104,28 @@ router.get("/players", (req, res) => {
 });
 
 // POST /players - creates new player with data specified in the request body
-playerRouter.post("/teams/:teamId/players/", (req, res, next) => {
-  console.log(req.params.teamId);
-  const player = new Player({
-    player: req.body,
-    _team: req.params.teamId
-  });
-  // const { name, height, weight, image_url } = req.body;
-  // console.log(player);
-  // console.log(req.body);
-  // if (!name || !height || !weight || !image_url) {
-  //   return res.json({
-  //     success: false,
-  //     error: "You forgot to fill in a section"
-  //   });
-  // }
-  // player.name = name;
-  // player.height = height;
-  // player.weight = weight;
-  // player.image_url = image_url;
-  // player.save(err => {
-  //   if (err) return res.json({ success: false, error: err });
-  //   return res.json({ success: true });
-  // });
+router.post("/teams/:id/players/", (req, res) => {
+  Team.findOne({ _id: req.params.id }, (err, team) => {
+    if (err) return res.status(400).send(err);
+    if (!team) return res.status(400).send(new Error("No team"));
+    console.log(team.players);
 
-  player.save((err, doc) => {
-    if (err) return res.json({ success: false, error: err });
-    Team.findByIdAndUpdate(
-      req.params.id,
-      { $push: { _teams: doc._id } },
-      { new: true },
-      (err, team) => {
-        if (err) res.send(err);
-        res.json({ doc });
+    Player.create(
+      {
+        name: req.body.name,
+        height: req.body.height,
+        weight: req.body.weight,
+        image_url: req.body.image_url
+      },
+      (err, player) => {
+        console.log(player);
+        if (err) return res.status(400).send(err);
+        team.players.push(player._id);
+        // team.save(err => {
+        //   if (err) return res.status(400).send(err);
+        //
+        //   res.json(player);
+        // });
       }
     );
   });
