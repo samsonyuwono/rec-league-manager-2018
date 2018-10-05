@@ -33,12 +33,12 @@ router.get("/teams", (req, res) => {
 });
 
 router.get("/teams/:id", (req, res) => {
-  Team.findById(req.params.id).then(id => {
-    if (!id) {
-      return res.json({ success: false, error: "No team id provided" });
-    }
-    return res.status(200).json(id);
-  });
+  Team.findById(req.params.id)
+    .populate("players")
+    .exec((err, teams) => {
+      if (err) return res.status(400).send(err);
+      res.json(teams);
+    });
 });
 
 router.post("/teams", (req, res) => {
@@ -92,11 +92,15 @@ router.delete("/teams/:id", (req, res) => {
 
 //Player routes
 
-//GET /teams{:id}/players - returns all players in team
-router.get("/teams/:id/players", (req, res) => {
-  res.send("these are the players for team id#" + req.params.id);
+router.get("/teams/:teamId/players", (req, res) => {
+  Team.findById(req.params.teamId)
+    .populate("players")
+    .exec((err, team) => {
+      if (err) return res.status(400).send(err);
+      res.json(team.players);
+    });
 });
-// GET /players - returns all players
+
 router.get("/players", (req, res) => {
   Player.find((err, players) => {
     if (err) return res.json({ success: false, error: err });
@@ -104,13 +108,10 @@ router.get("/players", (req, res) => {
   });
 });
 
-// POST /players - creates new player with data specified in the request body
-router.post("/teams/:id/players/", (req, res) => {
-  Team.findOne({ _id: req.params.id }, (err, team) => {
+router.post("/teams/:teamId/players/", (req, res) => {
+  Team.findOne({ _id: req.params.teamId }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));
-    console.log(team.players[0]);
-
     Player.create(
       {
         name: req.body.name,
@@ -119,19 +120,17 @@ router.post("/teams/:id/players/", (req, res) => {
         image_url: req.body.image_url
       },
       (err, player) => {
-        console.log(player);
         if (err) return res.status(400).send(err);
         team.players.push(player);
         team.save(err => {
           if (err) return res.status(400).send(err);
-
           res.json(player);
         });
       }
     );
   });
 });
-// GET /players/{:id} - returns a player with given id
+
 router.get("/players/:id", (req, res) => {
   Player.findById(req.params.id).then(id => {
     if (!id) {
@@ -141,9 +140,21 @@ router.get("/players/:id", (req, res) => {
   });
 });
 
-// PUT /players/{:id} - updates a player by id with data specified in the request body
+router.put("/players/:id", (req, res) => {
+  Player.findById(req.params.id, (error, player) => {
+    if (error) return res.json({ success: false, error });
+    const { name, height, weight, image_url } = req.body;
+    if (name) player.name = name;
+    if (height) player.height = height;
+    if (weight) player.weight = weight;
+    if (image_url) player.image_url = image_url;
+    player.save(error => {
+      if (error) return res.json({ success: false, error });
+      return res.json({ success: true });
+    });
+  });
+});
 
-// DELETE /players/{:id} - removes player by id
 router.delete("/players/:id", (req, res) => {
   Player.remove(
     {
