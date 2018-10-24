@@ -1,54 +1,84 @@
 var express = require("express");
 var router = express.Router();
-var mongoose = require("mongoose");
-var Team = require("../models/Team.js");
+var Team = require("../models/team.js");
+var Player = require("../models/player.js");
 
-var passport = require("passport");
-require("../config/passport")(passport);
+router.get("/", (req, res) => {
+  res.json({ message: "Hello World!" });
+});
 
-getToken = function(headers) {
-  if (headers && headers.authorization) {
-    var parted = headers.authorization.split(" ");
-    if (parted.length === 2) {
-      return parted[1];
-    } else {
-      return null;
-    }
-  } else {
-    return null;
-  }
-};
-
-/* GET ALL TEAMS */
-router.get("/", passport.authenticate("jwt", { session: false }), function(
-  req,
-  res
-) {
-  var token = getToken(req.headers);
-  if (token) {
-    Team.find(function(err, teams) {
-      if (err) return next(err);
+router.get("/teams", (req, res) => {
+  Team.find(req.params.id)
+    .populate("players")
+    .exec((err, teams) => {
+      if (err) return res.status(400).send(err);
       res.json(teams);
     });
-  } else {
-    return res.status(403).send({ success: false, msg: "Unauthorized." });
-  }
 });
 
-/* SAVE TEAM */
-router.post("/", passport.authenticate("jwt", { session: false }), function(
-  req,
-  res
-) {
-  var token = getToken(req.headers);
-  if (token) {
-    Team.create(req.body, function(err, post) {
-      if (err) return next(err);
-      res.json(post);
+router.get("/teams/:id", (req, res) => {
+  Team.findById(req.params.id)
+    .populate("players")
+    .exec((err, teams) => {
+      if (err) return res.status(400).send(err);
+      res.json(teams);
     });
-  } else {
-    return res.status(403).send({ success: false, msg: "Unauthorized." });
-  }
 });
 
-module.exports = router;
+router.post("/teams", (req, res) => {
+  const team = new Team();
+  const { name, wins, losses, logo_url } = req.body;
+  if (!name || !wins || !losses || !logo_url) {
+    return res.json({
+      success: false,
+      error: "You forgot to fill in a section"
+    });
+  }
+  team.name = name;
+  team.wins = wins;
+  team.losses = losses;
+  team.logo_url = logo_url;
+  team.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
+router.put("/teams/:id", (req, res) => {
+  Team.findById(req.params.id, (error, team) => {
+    if (error) return res.json({ success: false, error });
+    const { name, wins, losses, logo_url } = req.body;
+    if (name) team.name = name;
+    if (wins) team.wins = wins;
+    if (losses) team.losses = losses;
+    if (logo_url) team.logo_url = logo_url;
+    team.save(error => {
+      if (error) return res.json({ success: false, error });
+      return res.json({ success: true });
+    });
+  });
+});
+
+router.delete("/teams/:id", (req, res) => {
+  Team.remove(
+    {
+      _id: req.params.id
+    },
+    (error, team) => {
+      if (error) return res.json({ success: false, error: "Doesn't work" });
+      return res.json({
+        success: true,
+        message: " Team successfully removed!"
+      });
+    }
+  );
+});
+
+router.get("/teams/:teamId/players", (req, res) => {
+  Team.findById(req.params.teamId)
+    .populate("players")
+    .exec((err, team) => {
+      if (err) return res.status(400).send(err);
+      res.json(team.players);
+    });
+});

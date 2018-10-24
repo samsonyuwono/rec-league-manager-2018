@@ -1,115 +1,115 @@
-import { resetPlayerForm } from './playerForm';
+import { resetPlayerForm } from "./playerForm";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const setPlayers = players => {
   return {
-    type: 'FETCH_PLAYERS',
+    type: "FETCH_PLAYERS",
     players
-  }
-}
+  };
+};
 
 const addPlayer = player => {
   return {
-    type: 'CREATE_PLAYER_SUCCESS',
+    type: "CREATE_PLAYER_SUCCESS",
     player
-  }
-}
+  };
+};
 
 const updatePlayer = playerFormData => {
   return {
-    type: 'UPDATE_PLAYER_SUCCESS',
+    type: "UPDATE_PLAYER_SUCCESS",
     playerFormData
-  }
-}
+  };
+};
 
 const destroyPlayer = playerId => {
   return {
-    type: 'DELETE_PLAYER',
+    type: "DELETE_PLAYER",
     playerId
-  }
-}
+  };
+};
 
 const incrementLike = (likes, playerId) => {
   return {
-    type: 'INCREASE_LIKE',
+    type: "INCREASE_LIKE",
     likes,
     playerId
-  }
-}
+  };
+};
 
 export const fetchPlayers = () => {
   return dispatch => {
-    return fetch(`${API_URL}/players`)
+    return fetch("api/players")
       .then(response => response.json())
       .then(players => dispatch(setPlayers(players)))
       .catch(error => console.log(error));
-  }
-}
+  };
+};
 
 export const createPlayer = (player, teamID, history) => {
   return dispatch => {
     return fetch(`${API_URL}/players`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ player: player })
     })
       .then(response => response.json())
       .then(player => {
-        dispatch(addPlayer(player))
-        dispatch(resetPlayerForm())
-        history.push('/players')
+        dispatch(addPlayer(player));
+        dispatch(resetPlayerForm());
+        history.push("/players");
       })
-      .catch(error => console.log(error))
-  }
-}
+      .catch(error => console.log(error));
+  };
+};
 
 export const editPlayer = (playerId, player) => {
   return dispatch => {
     return fetch(`${API_URL}/players/${playerId}`, {
       method: "PATCH",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ player: player })
     })
       .then(response => response.json())
       .then(player => {
-        dispatch(updatePlayer(player))
+        dispatch(updatePlayer(player));
       })
-      .catch(error => console.log(error))
-  }
-}
+      .catch(error => console.log(error));
+  };
+};
 
-export const deletePlayer = (playerId) => {
+export const deletePlayer = playerId => {
   return dispatch => {
     return fetch(`${API_URL}/players/${playerId}`, {
       method: "DELETE"
     })
-    .then(response => response.json())
-    .then(player => {
-      dispatch(destroyPlayer(playerId))
-    })
-    .catch(error => console.log(error))
-  }
-}
+      .then(response => response.json())
+      .then(player => {
+        dispatch(destroyPlayer(playerId));
+      })
+      .catch(error => console.log(error));
+  };
+};
 
-export const increaseLike = (likes, playerId)=> {
-  const addLike = Object.assign({}, playerId, {likes: likes + 1})
+export const increaseLike = (likes, playerId) => {
+  const addLike = Object.assign({}, playerId, { likes: likes + 1 });
   return dispatch => {
     return fetch(`${API_URL}/players/${playerId}`, {
       method: "PATCH",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(addLike)
     })
       .then(response => response.json())
       .then(team => {
-        dispatch(incrementLike(likes, playerId))
+        dispatch(incrementLike(likes, playerId));
       })
-      .catch(error => console.log(error))
-  }
-}
+      .catch(error => console.log(error));
+  };
+};
