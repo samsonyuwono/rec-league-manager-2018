@@ -7,6 +7,9 @@ router.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
 });
 
+router.get("/teams/error", (req, res) => {
+  throw new Error("this is a forced error");
+});
 router.get("/teams", (req, res) => {
   Team.find(req.params.id)
     .populate("players")
@@ -82,3 +85,7 @@ router.get("/teams/:teamId/players", (req, res) => {
       res.json(team.players);
     });
 });
+
+router.use("/api", router);
+
+module.exports = router;

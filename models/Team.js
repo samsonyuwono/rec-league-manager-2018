@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var getSecret = require("../secrets");
+
+mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`);
 
 var TeamSchema = new Schema(
   {

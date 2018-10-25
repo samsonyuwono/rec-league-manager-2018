@@ -1,5 +1,10 @@
-import { getSecret } from "./secrets";
 const mongoose = require("mongoose");
 
-mongoose.set("debug", true);
-mongoose.connect(getSecret("dbUri"));
+const server = "ds213513.mlab.com:13513";
+const database = "rec-league-manager";
+const user = "samsonyuwono";
+const password = "326Myoplex";
+
+mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`);
+
+module.exports.Team = require("./Team");

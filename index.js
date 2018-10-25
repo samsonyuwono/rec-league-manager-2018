@@ -6,47 +6,37 @@ var express = require("express"),
   favicon = require("serve-favicon"),
   logger = require("morgan");
 
-//Require Routes
-var teamRoutes = require("./routes/team");
-var playerRoutes = require("./routes/player");
-var authRoutes = require("./routes/auth");
-import { getSecret } from "./secrets";
+var cors = require("cors");
+var app = express().use("*", cors());
+const router = express.Router();
+API_PORT = process.env.API_PORT || 3001;
 
-const API_PORT = process.env.API_PORT || 3001;
+let teamRoute = require("./routes/team");
+playerRoute = require("./routes/player");
 
-mongoose.Promise = require("bluebird");
-
-mongoose.connect(getSecret("dbUri"));
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
-app.use(logger("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: "false" }));
-app.use(express.static(path.join(__dirname, "build")));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(teamRoute);
+app.use(playerRoute);
+app.use(express.static("views"));
+app.use(logger("dev"));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error("Not Found");
-  err.status = 404;
-  next(err);
+app.use((req, res, next) => {
+  console.log(`${new Date().toString()}=> ${req.originalUrl}`);
+  next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  res.status(404).send("We think you are lost");
+});
+
+app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render("error");
 });
 
-app.use("/api");
-
-app.use(function(req, res) {
-  res.render("404");
-});
-
+const PORT = process.env.API_PORT || 3001;
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
