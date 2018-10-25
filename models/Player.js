@@ -12,4 +12,6 @@ var PlayerSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Player", PlayerSchema);
+let Player = mongoose.model("Player", PlayerSchema);
+
+module.exports = Player;

@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var TeamSchema = new Schema(
@@ -12,4 +12,6 @@ var TeamSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Team", TeamSchema);
+let Team = mongoose.model("Team", TeamSchema);
+
+module.exports = Team;
