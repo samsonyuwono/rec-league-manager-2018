@@ -4,15 +4,15 @@ var express = require("express"),
   mongoose = require("mongoose"),
   path = require("path"),
   favicon = require("serve-favicon"),
-  logger = require("morgan");
+  logger = require("morgan"),
+  cors = require("cors"),
+  app = express().use("*", cors());
 
-var cors = require("cors");
-var app = express().use("*", cors());
-const router = express.Router();
-API_PORT = process.env.API_PORT || 3001;
+const router = express.Router(),
+  API_PORT = process.env.API_PORT || 3001;
 
-let teamRoute = require("./routes/team");
-playerRoute = require("./routes/player");
+let teamRoute = require("./routes/team"),
+  playerRoute = require("./routes/player");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404).send("We think you are lost");
 });
