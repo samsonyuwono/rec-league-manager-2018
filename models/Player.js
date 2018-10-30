@@ -7,7 +7,8 @@ var PlayerSchema = new Schema(
     name: { type: String, required: true },
     height: { type: Number, required: true, minlength: 3 },
     weight: { type: Number, required: true, minlength: 3 },
-    image_url: { type: String, required: true }
+    image_url: { type: String, required: true },
+    likes: { type: Number, required: false }
   },
   { timestamps: true }
 );

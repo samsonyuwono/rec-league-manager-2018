@@ -11,10 +11,7 @@ class PlayersList extends Component {
   }
 
   render() {
-    let players = this.props.players;
-    console.log(players);
-    debugger;
-    const sortedPlayerHeight = players.data.sort((a, b) => {
+    const sortedPlayerHeight = this.props.players.sort((a, b) => {
       return b.height - a.height;
     });
     return (

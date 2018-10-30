@@ -6,6 +6,7 @@ var Player = require("../models/player.js");
 router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");
 });
+
 router.get("/teams", (req, res) => {
   Team.find(req.params.id)
     .populate("players")

@@ -6,7 +6,7 @@ var Player = require("../models/player.js");
 router.get("/players", (req, res) => {
   Player.find((err, players) => {
     if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, data: players });
+    return res.json(players);
   });
 });
 
@@ -19,7 +19,8 @@ router.post("/teams/:teamId/players/", (req, res) => {
         name: req.body.name,
         height: req.body.height,
         weight: req.body.weight,
-        image_url: req.body.image_url
+        image_url: req.body.image_url,
+        likes: req.body.likes
       },
       (err, player) => {
         if (err) return res.status(400).send(err);
@@ -50,6 +51,7 @@ router.put("/players/:id", (req, res) => {
     if (height) player.height = height;
     if (weight) player.weight = weight;
     if (image_url) player.image_url = image_url;
+    if (likes) player.likes = likes;
     player.save(error => {
       if (error) return res.json({ success: false, error });
       return res.json({ success: true });
