@@ -1,39 +1,42 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import TeamCard from '../../components/teams/TeamCard';
-import TeamForm from '../../components/teams/TeamForm';
-import { getTeams, deleteTeam } from '../../actions/teams'
-import '../../assets/Teams.css'
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import TeamCard from "../../components/teams/TeamCard";
+import TeamForm from "../../components/teams/TeamForm";
+import { getTeams, deleteTeam } from "../../actions/teams";
+import "../../assets/Teams.css";
 
 class TeamsList extends Component {
-
   componentDidMount() {
-    this.props.getTeams()
+    this.props.getTeams();
   }
 
-
   render() {
-    const sortedTeamWins = this.props.teams.sort((a,b) => { return b.wins - a.wins})
+    const displayTeam = this.props.teams
+      .sort((a, b) => {
+        return a.wins - b.wins;
+      })
+      .map(team => <TeamCard key={team.id} team={team} />);
     return (
-    <div className= "TeamsContainer">
-      <h1>Teams</h1>
-      <div className="col-md-4">
-      {sortedTeamWins.map(team => <TeamCard key={team.id} team=
-        {team} />)}
-      </div>
+      <div className="TeamsContainer">
+        <h1>Teams</h1>
+        <div key={this.props} className="col-md-4">
+          {displayTeam}
+        </div>
         <div className="col-md-8">
-        {this.props.children}
-        <TeamForm />
+          {this.props.children}
+          <TeamForm />
+        </div>
       </div>
-   </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return ({
+const mapStateToProps = state => {
+  return {
     teams: state.teams
-  })
-}
+  };
+};
 
-export default connect(mapStateToProps, { getTeams, deleteTeam })(TeamsList);
+export default connect(
+  mapStateToProps,
+  { getTeams, deleteTeam }
+)(TeamsList);

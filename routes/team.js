@@ -3,10 +3,6 @@ var router = express.Router();
 var Team = require("../models/team.js");
 var Player = require("../models/player.js");
 
-router.get("/", (req, res) => {
-  res.json({ message: "Hello World!" });
-});
-
 router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");
 });

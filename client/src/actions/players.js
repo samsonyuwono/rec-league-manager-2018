@@ -1,6 +1,8 @@
 import { resetPlayerForm } from "./playerForm";
 
-const API_URL = process.env.REACT_APP_API_URL;
+// const API_URL = process.env.REACT_APP_API_URL;
+
+let API_URL = "http://localhost:3001/api";
 
 const setPlayers = players => {
   return {
@@ -40,10 +42,11 @@ const incrementLike = (likes, playerId) => {
 
 export const fetchPlayers = () => {
   return dispatch => {
-    return fetch("api/players")
+    return fetch(`${API_URL}/players`)
       .then(response => response.json())
       .then(players => dispatch(setPlayers(players)))
       .catch(error => console.log(error));
+    debugger;
   };
 };
 

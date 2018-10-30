@@ -1,10 +1,11 @@
 import { resetTeamForm } from "./teamForm";
+// let API_URL = process.env.REACT_APP_API_URL;
 
-let API_URL = process.env.REACT_APP_API_URL;
+let API_URL = "http://localhost:3001/api";
 
-if (process.env.NODE_ENV === "production") {
-  process.env.REACT_PRODUCTION_API_URL;
-}
+// if (process.env.NODE_ENV === "production") {
+//   process.env.REACT_PRODUCTION_API_URL;
+// }
 
 const setTeams = teams => {
   return {
@@ -53,7 +54,7 @@ export const incrementLoss = (losses, teamId) => {
 export const getTeams = () => {
   return dispatch => {
     return fetch(`${API_URL}/teams`)
-      .then(response => response.json())
+      .then(res => res.json())
       .then(teams => dispatch(setTeams(teams)))
       .catch(error => console.log(error));
   };
