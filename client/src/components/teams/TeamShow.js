@@ -8,7 +8,6 @@ class TeamShow extends Component {
   componentDidMount() {
     this.props.getTeams();
     this.props.fetchPlayers();
-    debugger;
   }
 
   handleOnDelete = event => {
@@ -21,11 +20,13 @@ class TeamShow extends Component {
   render() {
     const teamShow = () => {
       const players = this.props.players;
-      //below is all undefined
-      const teamId = parseInt(this.props.match.params.id);
+      const teamId = this.props.match.params.id;
+      debugger;
+      console.log(this.props.match);
       const sortedTeamPlayers = players.filter(
         player => player.team_id === teamId
       );
+      debugger;
       if (sortedTeamPlayers.length === 0) {
         return <p>Please add players to your roster in the form below.</p>;
       } else {

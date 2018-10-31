@@ -19,9 +19,9 @@ router.get("/teams", (req, res) => {
 router.get("/teams/:id", (req, res) => {
   Team.findById(req.params.id)
     .populate("players")
-    .exec((err, teams) => {
+    .exec((err, team) => {
       if (err) return res.status(400).send(err);
-      res.json(teams);
+      res.json(team);
     });
 });
 
@@ -75,14 +75,14 @@ router.delete("/teams/:id", (req, res) => {
   );
 });
 
-router.get("/teams/:teamId/players", (req, res) => {
-  Team.findById(req.params.teamId)
-    .populate("players")
-    .exec((err, team) => {
-      if (err) return res.status(400).send(err);
-      res.json(team.players);
-    });
-});
+// router.get("/teams/:teamId/players", (req, res) => {
+//   Team.findById(req.params.teamId)
+//     .populate("players")
+//     .exec((err, team) => {
+//       if (err) return res.status(400).send(err);
+//       res.json(team.players);
+//     });
+// });
 
 router.use("/api", router);
 

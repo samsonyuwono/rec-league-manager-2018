@@ -17,7 +17,7 @@ class PlayerShow extends Component {
   render() {
     const playerShow = () => {
       const players = this.props.players;
-      const playerId = parseInt(this.props.match.params.id);
+      const playerId = this.props.match.params.id;
       const sortedPlayers = players.filter(player => player._id === playerId);
       return sortedPlayers.map(player => {
         return (

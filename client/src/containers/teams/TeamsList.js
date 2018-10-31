@@ -15,7 +15,7 @@ class TeamsList extends Component {
       .sort((a, b) => {
         return b.wins - a.wins;
       })
-      .map(team => <TeamCard key={team.id} team={team} />);
+      .map(team => <TeamCard key={team._id} team={team} />);
     return (
       <div className="TeamsContainer">
         <h1>Teams</h1>
