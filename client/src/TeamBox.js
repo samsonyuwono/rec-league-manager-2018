@@ -67,7 +67,6 @@ class TeamBox extends Component {
   submitTeam = e => {
     e.preventDefault();
     const { name, wins, losses, logo_url, updateId } = this.state;
-    debugger;
     if (!name || !wins || !losses || !logo_url) return;
     if (updateId) {
       this.submitUpdatedTeam();
@@ -91,7 +90,6 @@ class TeamBox extends Component {
         createdAt: new Date()
       }
     ];
-    debugger;
     this.setState({ data });
     fetch("/api/teams", {
       method: "POST",

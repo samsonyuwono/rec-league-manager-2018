@@ -52,6 +52,7 @@ router.put("/teams/:id", (req, res) => {
     if (wins) team.wins = wins;
     if (losses) team.losses = losses;
     if (logo_url) team.logo_url = logo_url;
+    console.log(team);
     team.save(error => {
       if (error) return res.json({ success: false, error });
       return res.json({ success: true });

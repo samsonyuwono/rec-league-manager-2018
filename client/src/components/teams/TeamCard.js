@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 import TeamWinLoss from "./TeamWinLoss";
 
 const TeamCard = ({ team }) => (
-  <div key={team.id} className="TeamCard">
+  <div key={team._id} className="TeamCard">
     <h3>{team.name}</h3>
     <img
       className="TeamImage"
-      key={team.id}
+      key={team._id}
       src={team.logo_url}
       alt={team.name}
     />
     <div>
-      <Link style={{ marginBottom: "5px" }} to={`/teams/${team.id}`}>
+      <Link style={{ marginBottom: "5px" }} to={`/teams/${team._id}`}>
         Roster
       </Link>{" "}
       <br />
-      <Link style={{ marginBottom: "5px" }} to={`/teams/${team.id}/edit`}>
+      <Link style={{ marginBottom: "5px" }} to={`/teams/${team._id}/edit`}>
         Edit Team
       </Link>{" "}
       <br />
-      <TeamWinLoss team={team.id} wins={team.wins} losses={team.losses} />
+      <TeamWinLoss team={team._id} wins={team.wins} losses={team.losses} />
     </div>
   </div>
 );

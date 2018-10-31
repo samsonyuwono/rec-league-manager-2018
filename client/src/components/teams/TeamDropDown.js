@@ -20,7 +20,7 @@ class TeamDropDown extends Component {
     const teams = this.props.teams;
     const teamOptions = teams.map(team => {
       return (
-        <option value={team.id} id={team.name} key={team.id}>
+        <option value={team._id} id={team.name} key={team._id}>
           {team.name}
         </option>
       );

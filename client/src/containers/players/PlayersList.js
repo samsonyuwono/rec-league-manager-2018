@@ -18,7 +18,7 @@ class PlayersList extends Component {
       <div className="PlayersContainer">
         <h1>Players</h1>
         {sortedPlayerHeight.map(player => (
-          <PlayerCard key={player.id} player={player} />
+          <PlayerCard key={player._id} player={player} />
         ))}
         <PlayerForm />
         <br />

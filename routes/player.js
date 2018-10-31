@@ -51,7 +51,6 @@ router.put("/players/:id", (req, res) => {
     if (height) player.height = height;
     if (weight) player.weight = weight;
     if (image_url) player.image_url = image_url;
-    if (likes) player.likes = likes;
     player.save(error => {
       if (error) return res.json({ success: false, error });
       return res.json({ success: true });

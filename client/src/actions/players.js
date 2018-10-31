@@ -46,7 +46,6 @@ export const fetchPlayers = () => {
       .then(response => response.json())
       .then(players => dispatch(setPlayers(players)))
       .catch(error => console.log(error));
-    debugger;
   };
 };
 

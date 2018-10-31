@@ -13,7 +13,7 @@ class TeamsList extends Component {
   render() {
     const displayTeam = this.props.teams
       .sort((a, b) => {
-        return a.wins - b.wins;
+        return b.wins - a.wins;
       })
       .map(team => <TeamCard key={team.id} team={team} />);
     return (

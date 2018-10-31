@@ -15,6 +15,7 @@ class TeamStandings extends Component {
     });
     return (
       <BootstrapTable
+        key={this.props.teams._id}
         data={this.props.teams}
         bordered={true}
         className="tr-style"

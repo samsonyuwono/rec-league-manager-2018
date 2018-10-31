@@ -8,6 +8,7 @@ class TeamShow extends Component {
   componentDidMount() {
     this.props.getTeams();
     this.props.fetchPlayers();
+    debugger;
   }
 
   handleOnDelete = event => {
@@ -19,8 +20,8 @@ class TeamShow extends Component {
 
   render() {
     const teamShow = () => {
-      debugger;
       const players = this.props.players;
+      //below is all undefined
       const teamId = parseInt(this.props.match.params.id);
       const sortedTeamPlayers = players.filter(
         player => player.team_id === teamId
@@ -30,7 +31,7 @@ class TeamShow extends Component {
       } else {
         return sortedTeamPlayers.map(player => {
           return (
-            <div key={player.id}>
+            <div key={player._id}>
               <img
                 className="PlayerShow"
                 src={player.image_url}
