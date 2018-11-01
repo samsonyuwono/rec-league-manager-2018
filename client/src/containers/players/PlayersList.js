@@ -12,7 +12,7 @@ class PlayersList extends Component {
 
   render() {
     const sortedPlayerHeight = this.props.players.sort((a, b) => {
-      return b.height - a.height;
+      return b.likes - a.likes;
     });
     return (
       <div className="PlayersContainer">

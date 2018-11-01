@@ -29,7 +29,7 @@ class TeamDropDown extends Component {
       <div>
         <label htmlFor="team_select">Select Team</label>
         <select
-          value={this.props.teams.id}
+          value={this.props.teams._id}
           onChange={this.handleTeamSelect}
           name="team_select"
         >

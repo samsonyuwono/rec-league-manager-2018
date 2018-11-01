@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ReactMarkdown from "react-markdown";
 
 const Team = props => (
-  <div key={props.id} className="team">
+  <div key={props._id} className="team">
     <img
       alt="team_image"
       className="TeamImage"
@@ -21,7 +21,7 @@ const Team = props => (
         <button>
           <a
             onClick={() => {
-              props.handleUpdateTeam(props.id);
+              props.handleUpdateTeam(props._id);
             }}
           >
             update
@@ -30,7 +30,7 @@ const Team = props => (
         <button>
           <a
             onClick={() => {
-              props.handleDeleteTeam(props.id);
+              props.handleDeleteTeam(props._id);
             }}
           >
             delete

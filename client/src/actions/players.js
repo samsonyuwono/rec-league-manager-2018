@@ -51,7 +51,7 @@ export const fetchPlayers = () => {
 
 export const createPlayer = (player, teamID, history) => {
   return dispatch => {
-    return fetch(`${API_URL}/players`, {
+    return fetch(`${API_URL}/teams/${teamID}/players`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -99,10 +99,11 @@ export const deletePlayer = playerId => {
 };
 
 export const increaseLike = (likes, playerId) => {
+  debugger;
   const addLike = Object.assign({}, playerId, { likes: likes + 1 });
   return dispatch => {
     return fetch(`${API_URL}/players/${playerId}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },

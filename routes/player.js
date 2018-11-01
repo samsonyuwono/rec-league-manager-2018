@@ -10,7 +10,7 @@ router.get("/players", (req, res) => {
   });
 });
 
-router.post("/teams/:teamId/players", (req, res) => {
+router.post("/teams/:teamId/player", (req, res) => {
   Team.findOne({ _id: req.params.teamId }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));
@@ -46,11 +46,12 @@ router.get("/players/:id", (req, res) => {
 router.put("/players/:id", (req, res) => {
   Player.findById(req.params.id, (error, player) => {
     if (error) return res.json({ success: false, error });
-    const { name, height, weight, image_url } = req.body;
+    const { name, height, weight, image_url, likes } = req.body;
     if (name) player.name = name;
     if (height) player.height = height;
     if (weight) player.weight = weight;
     if (image_url) player.image_url = image_url;
+    if (likes) player.likes = likes;
     player.save(error => {
       if (error) return res.json({ success: false, error });
       return res.json({ success: true });
