@@ -30,8 +30,7 @@ router.post("/teams", (req, res) => {
   const { name, wins, losses, logo_url } = req.body;
   if (!name || !wins || !losses || !logo_url) {
     return res.json({
-      success: false,
-      error: "You forgot to fill in a section"
+      err
     });
   }
   team.name = name;

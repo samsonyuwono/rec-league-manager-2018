@@ -17,7 +17,6 @@ class PlayerLike extends Component {
       likes: this.state.likes + 1
     });
     this.props.increaseLike(this.props.likes, this.props.player);
-    debugger;
   };
 
   render() {

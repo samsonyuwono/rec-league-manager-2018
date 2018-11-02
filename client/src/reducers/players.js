@@ -23,7 +23,6 @@ export default (state = [], action) => {
     case "INCREASE_LIKE":
       const newLikeState = state.map(player => {
         if (player._id === action.playerId) {
-          debugger;
           return Object.assign({}, player, { likes: action.likes + 1 });
         } else {
           return player;

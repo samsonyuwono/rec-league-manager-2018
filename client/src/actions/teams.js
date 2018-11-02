@@ -61,6 +61,7 @@ export const getTeams = () => {
 };
 
 export const createTeam = (team, history) => {
+  debugger;
   return dispatch => {
     return fetch(`${API_URL}/teams`, {
       method: "POST",
