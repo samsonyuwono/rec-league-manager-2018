@@ -61,7 +61,6 @@ export const getTeams = () => {
 };
 
 export const createTeam = (team, history) => {
-  debugger;
   return dispatch => {
     return fetch(`${API_URL}/teams`, {
       method: "POST",
@@ -112,10 +111,9 @@ export const deleteTeam = teamId => {
 
 export const increaseWin = (wins, teamId) => {
   const addWin = Object.assign({}, teamId, { wins: wins + 1 });
-
   return dispatch => {
     return fetch(`${API_URL}/teams/${teamId}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
