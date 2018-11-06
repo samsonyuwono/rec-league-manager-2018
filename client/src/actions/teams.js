@@ -61,16 +61,24 @@ export const getTeams = () => {
 };
 
 export const createTeam = (team, history) => {
+  let newTeam = new Object();
+  newTeam.name = team.name;
+  newTeam.wins = parseInt(team.wins);
+  newTeam.losses = parseInt(team.losses);
+  newTeam.logo_url = team.logo_url;
+  debugger;
   return dispatch => {
     return fetch(`${API_URL}/teams`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ team: team })
+      body: JSON.stringify({ newTeam: newTeam })
     })
       .then(response => response.json())
-      .then(team => {
+      .then(myTeam => {
+        console.log(myTeam);
+        console.log(team);
         dispatch(addTeam(team));
         dispatch(resetTeamForm());
         history.push("/teams");

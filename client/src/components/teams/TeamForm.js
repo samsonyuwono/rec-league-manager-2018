@@ -4,30 +4,12 @@ import { updateTeamFormData } from "../../actions/teamForm";
 import { createTeam } from "../../actions/teams";
 
 class TeamForm extends Component {
-  handleOnWin = event => {
-    const { name, value } = event.target;
-    const currentWinData = Object.assign({}, this.props.teamFormData, {
-      [name]: Number(value)
-    });
-
-    this.props.updateTeamFormData(currentWinData);
-  };
-
-  handleOnLoss = event => {
-    const { name, value } = event.target;
-    const currentLossData = Object.assign({}, this.props.teamFormData, {
-      [name]: Number(value)
-    });
-    this.props.updateTeamFormData(currentLossData);
-  };
-
   handleOnChange = event => {
     const { name, value } = event.target;
     const currentTeamFormData = Object.assign({}, this.props.teamFormData, {
       [name]: value
     });
     this.props.updateTeamFormData(currentTeamFormData);
-    debugger;
   };
 
   handleOnSubmit = event => {
@@ -54,7 +36,7 @@ class TeamForm extends Component {
             <label htmlFor="wins">Wins:</label>
             <input
               type="number"
-              onChange={this.handleOnWin}
+              onChange={this.handleOnChange}
               name="wins"
               value={wins}
             />
@@ -63,7 +45,7 @@ class TeamForm extends Component {
             <label htmlFor="losses">Losses:</label>
             <input
               type="number"
-              onChange={this.handleOnLoss}
+              onChange={this.handleOnChange}
               name="losses"
               value={losses}
             />

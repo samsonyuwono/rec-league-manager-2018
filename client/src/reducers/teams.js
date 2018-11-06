@@ -4,6 +4,7 @@ export default (state = [], action) => {
       return action.teams;
 
     case "CREATE_TEAM_SUCCESS":
+      debugger;
       return state.concat(action.team);
 
     case "UPDATE_TEAM_SUCCESS":
