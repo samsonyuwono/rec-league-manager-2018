@@ -49,17 +49,22 @@ export const fetchPlayers = () => {
   };
 };
 
-export const createPlayer = (player, teamID, history) => {
+export const createPlayer = (player, history) => {
+  let teamId = player.team_id;
   return dispatch => {
-    return fetch(`${API_URL}/teams/${teamID}/players`, {
+    console;
+    return fetch(`${API_URL}/teams/${teamId}/player`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: JSON.stringify({ player: player })
+      body: JSON.stringify(player)
     })
-      .then(response => response.json())
+      .then(response => {
+        console.log("response.json is; ", JSON.parse(response));
+        response.json();
+      })
       .then(player => {
         dispatch(addPlayer(player));
         dispatch(resetPlayerForm());

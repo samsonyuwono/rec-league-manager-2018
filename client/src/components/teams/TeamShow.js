@@ -24,7 +24,6 @@ class TeamShow extends Component {
       const sortedTeamPlayers = players.filter(
         player => player.team_id === teamId
       );
-      debugger;
       if (sortedTeamPlayers.length === 0) {
         return <p>Please add players to your roster in the form below.</p>;
       } else {
