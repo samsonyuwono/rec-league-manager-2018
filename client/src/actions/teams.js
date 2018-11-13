@@ -60,28 +60,29 @@ export const getTeams = () => {
   };
 };
 
-export const createTeam = (team, history) => {
-  let newTeam = new Object();
+export const createTeam = (team, radix) => {
+  let newTeam = {};
   newTeam.name = team.name;
-  newTeam.wins = parseInt(team.wins);
-  newTeam.losses = parseInt(team.losses);
+  newTeam.wins = parseInt(team.wins, radix);
+  newTeam.losses = parseInt(team.losses, radix);
   newTeam.logo_url = team.logo_url;
   debugger;
   return dispatch => {
+    //look here. figure out what's being passed
     return fetch(`${API_URL}/teams`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ newTeam: newTeam })
+      body: JSON.stringify(newTeam)
     })
-      .then(response => response.json())
-      .then(myTeam => {
-        console.log(myTeam);
-        console.log(team);
-        dispatch(addTeam(team));
+      .then(response => {
+        console.log("response.json is; ", JSON.parse(response));
+        response.json();
+      })
+      .then(newTeam => {
+        dispatch(addTeam(newTeam));
         dispatch(resetTeamForm());
-        history.push("/teams");
       })
       .catch(error => console.log(error));
   };

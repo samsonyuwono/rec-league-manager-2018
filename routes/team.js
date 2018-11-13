@@ -38,6 +38,8 @@ router.post("/teams", (req, res) => {
   team.wins = wins;
   team.losses = losses;
   team.logo_url = logo_url;
+  console.log(name, wins, losses, logo_url);
+  console.log("This is" + req.body);
   team.save(err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });

@@ -6,6 +6,7 @@ import { createTeam } from "../../actions/teams";
 class TeamForm extends Component {
   handleOnChange = event => {
     const { name, value } = event.target;
+
     const currentTeamFormData = Object.assign({}, this.props.teamFormData, {
       [name]: value
     });

@@ -1,5 +1,6 @@
 export const updateTeamFormData = teamFormData => {
   console.log(teamFormData);
+
   return {
     type: "UPDATED_DATA",
     teamFormData

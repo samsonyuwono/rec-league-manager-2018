@@ -54,7 +54,8 @@ export const createPlayer = (player, teamID, history) => {
     return fetch(`${API_URL}/teams/${teamID}/players`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json"
       },
       body: JSON.stringify({ player: player })
     })
