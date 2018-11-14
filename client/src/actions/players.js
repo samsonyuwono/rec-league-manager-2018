@@ -61,10 +61,7 @@ export const createPlayer = (player, history) => {
       },
       body: JSON.stringify(player)
     })
-      .then(response => {
-        console.log("response.json is; ", JSON.parse(response));
-        response.json();
-      })
+      .then(response => response.json())
       .then(player => {
         dispatch(addPlayer(player));
         dispatch(resetPlayerForm());
@@ -81,7 +78,7 @@ export const editPlayer = (playerId, player) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ player: player })
+      body: JSON.stringify(player)
     })
       .then(response => response.json())
       .then(player => {

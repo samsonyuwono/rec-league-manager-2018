@@ -27,7 +27,7 @@ class App extends Component {
             <Route exact path="/teams/new" component={TeamForm} />
             <Route exact path="/teams/:id" component={TeamShow} />
             <Route exact path="/teams" component={TeamsList} />
-            <Route exact path="/teams/id/edit" component={TeamEditForm} />
+            <Route exact path="/teams/:id/edit" component={TeamEditForm} />
             <Route exact path="/players/" component={PlayersList} />
             <Route exact path="/players/new" component={PlayerForm} />
             <Route exact path="/players/:id" component={PlayerShow} />

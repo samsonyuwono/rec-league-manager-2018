@@ -82,11 +82,11 @@ export const createTeam = (team, history) => {
 export const editTeam = (teamId, team) => {
   return dispatch => {
     return fetch(`${API_URL}/teams/${teamId}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ team: team })
+      body: JSON.stringify(team)
     })
       .then(response => response.json())
       .then(team => {
