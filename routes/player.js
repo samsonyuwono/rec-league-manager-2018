@@ -11,6 +11,7 @@ router.get("/players", (req, res) => {
 });
 
 router.post("/teams/:teamId/player", (req, res) => {
+  console.log(req.body.team_id);
   Team.findOne({ _id: req.params.teamId }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));
@@ -20,7 +21,8 @@ router.post("/teams/:teamId/player", (req, res) => {
         height: req.body.height,
         weight: req.body.weight,
         image_url: req.body.image_url,
-        likes: req.body.likes
+        likes: req.body.likes,
+        team_id: req.body.team_id
       },
       (err, player) => {
         if (err) return res.status(400).send(err);
@@ -46,12 +48,13 @@ router.get("/players/:id", (req, res) => {
 router.put("/players/:id", (req, res) => {
   Player.findById(req.params.id, (error, player) => {
     if (error) return res.json({ success: false, error });
-    const { name, height, weight, image_url, likes } = req.body;
+    const { name, height, weight, image_url, likes, team_id } = req.body;
     if (name) player.name = name;
     if (height) player.height = height;
     if (weight) player.weight = weight;
     if (image_url) player.image_url = image_url;
     if (likes) player.likes = likes;
+    if (team_id) player.team_id = team_id;
     player.save(error => {
       if (error) return res.json({ success: false, error });
       return res.json({ success: true });

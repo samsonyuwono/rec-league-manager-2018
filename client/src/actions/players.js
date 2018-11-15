@@ -49,10 +49,9 @@ export const fetchPlayers = () => {
   };
 };
 
-export const createPlayer = (player, history) => {
+export const createPlayer = player => {
   let teamId = player.team_id;
   return dispatch => {
-    console;
     return fetch(`${API_URL}/teams/${teamId}/player`, {
       method: "POST",
       headers: {
@@ -65,7 +64,6 @@ export const createPlayer = (player, history) => {
       .then(player => {
         dispatch(addPlayer(player));
         dispatch(resetPlayerForm());
-        history.push("/players");
       })
       .catch(error => console.log(error));
   };

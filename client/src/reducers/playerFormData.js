@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
       return action.playerFormData;
 
     case "RESET_PLAYER_FORM":
-      debugger;
       return initialState;
 
     default:

@@ -20,6 +20,7 @@ class TeamShow extends Component {
   render() {
     const teamShow = () => {
       const players = this.props.players;
+      console.log(players);
       const teamId = this.props.match.params.id;
       const sortedTeamPlayers = players.filter(
         player => player.team_id === teamId
