@@ -17,8 +17,11 @@ export default (state = [], action) => {
       return newTeamState;
 
     case "DELETE_TEAM":
-      state.splice(action.playerId, 1);
-      return state;
+      debugger;
+      return [
+        ...state.slice(0, action.teamId),
+        ...state.slice(action.teamId + 1)
+      ];
 
     case "INCREASE_WIN":
       const newWinState = state.map(team => {
