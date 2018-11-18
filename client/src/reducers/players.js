@@ -17,10 +17,7 @@ export default (state = [], action) => {
       return newPlayerState;
 
     case "DELETE_PLAYER":
-      return [
-        ...state.slice(0, action.playerId),
-        ...state.slice(action.playerId + 1)
-      ];
+      state.splice(action.playerId, 1);
       return state;
 
     case "INCREASE_LIKE":

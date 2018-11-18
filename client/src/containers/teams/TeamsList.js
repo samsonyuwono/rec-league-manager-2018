@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import TeamCard from "../../components/teams/TeamCard";
 import TeamForm from "../../components/teams/TeamForm";
 import { getTeams, deleteTeam } from "../../actions/teams";
-import "../../assets/Teams.css";
+import "../../assets/Teams.scss";
 
 class TeamsList extends Component {
   componentDidMount() {

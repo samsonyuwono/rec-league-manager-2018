@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getTeams } from "../../actions/teams";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import "../../assets/Table.css";
+import "../../assets/Table.scss";
 
 class TeamStandings extends Component {
   componentDidMount() {

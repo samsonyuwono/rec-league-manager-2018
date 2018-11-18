@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.22.2",
+    "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
@@ -32,6 +33,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.0"
+    "eslint-plugin-react": "^7.11.0",
+    "sass-loader": "^7.1.0"
   }
 }

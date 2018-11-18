@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import Home from "../components/Home";
 import TeamsList from "./teams/TeamsList";
 import TeamShow from "../components/teams/TeamShow";
@@ -13,7 +12,7 @@ import PlayerShow from "../components/players/PlayerShow";
 import PlayerEditForm from "../components/players/PlayerEditForm";
 import Navbar from "../components/Navbar";
 
-import "./../assets/App.css";
+import "./../assets/App.scss";
 
 class App extends Component {
   render() {
