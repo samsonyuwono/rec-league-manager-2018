@@ -4,13 +4,10 @@ import court from "../assets/court.jpg";
 
 const Home = props => {
   return (
-    <div className="uk-position-medium uk-position-center uk-text-center">
-      <h1>Welcome to the Rec League App</h1>
-      <div className="padding-bottom">
+    <div className="home-container">
+      <div className="home-banner">
         <img alt="" src={court} />
-        <h3> An open source app for organizing your Rec League</h3>
-      </div>
-      <div className="padding-top">
+        <h1>Welcome to the Rec League App</h1>
         <p>Manage your teams and players all in one app</p>
       </div>
     </div>
