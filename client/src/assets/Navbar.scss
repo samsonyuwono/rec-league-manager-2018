@@ -1,16 +1,25 @@
-.navbar {
-  width: "100px";
-  padding: "12px";
-  margin: "0 6px 6px";
-  background: "#B6B6B4";
-  textdecoration: "none";
-  color: "white";
-  borderbottomleftradius: "10px";
-  borderbottomrightradius: "10px";
+.nav-wrapper {
+  height: 7vh;
+  border-bottom: 2px solid black;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.nav-bar {
-  border-bottom: "2px solid black";
-  padding-bottom: "10px";
-  margin-bottom: "50px";
+.nav-list {
+  display: inline-block;
+  list-style-type: none;
+  li {
+    display: inline-block;
+    float: left;
+    line-height: 3vh;
+  }
+  a {
+    text-transform: uppercase;
+    padding: 12px;
+    margin: 0 6px 6px;
+    text-decoration: none;
+    color: white;
+  }
+  a:hover {
+    background-color: #d1d0ce;
+  }
 }

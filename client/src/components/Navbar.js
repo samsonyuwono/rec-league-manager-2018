@@ -1,70 +1,84 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import "../assets/Navbar.scss";
 
+const Navbar = () => (
+  <div className="nav-wrapper">
+    <ul className="nav-list">
+      <li>
+        <NavLink
+          to="/"
+          exact
+          activeStyle={{
+            background: "#D1D0CE"
+          }}
+        >
+          Home
+        </NavLink>
+      </li>
 
-const link = {
-  width: '100px',
-  padding: '12px',
-  margin: '0 6px 6px',
-  background: '#B6B6B4',
-  textDecoration: 'none',
-  color: 'white',
-  borderBottomLeftRadius: '10px',
-  borderBottomRightRadius: '10px',
-}
+      <li>
+        <NavLink
+          to="/teams"
+          exact
+          activeStyle={{
+            background: "#D1D0CE"
+          }}
+        >
+          Teams
+        </NavLink>
+      </li>
 
+      <li>
+        <NavLink
+          to="/teams/new"
+          exact
+          activeStyle={{
+            background: "#D1D0CE"
+          }}
+        >
+          Add a team
+        </NavLink>
+      </li>
 
-const Navbar = () =>
-  <div className='navbar'>
-    <NavLink
-    to='/'
-    exact
-    style={link}
-    activeStyle={{
-      background: '#D1D0CE'
-    }}>Home</NavLink>
+      <li>
+        <NavLink
+          to="/players"
+          exact
+          activeStyle={{
+            background: "#D1D0CE"
+          }}
+        >
+          Players
+        </NavLink>
+      </li>
 
-    <NavLink
-    to='/teams'
-    exact
-    style={link}
-    activeStyle={{
-      background: '#D1D0CE'
-    }}>Teams</NavLink>
+      <li>
+        <NavLink
+          to="/players/new"
+          exact
+          activeStyle={{
+            background: "#D1D0CE"
+          }}
+        >
+          Add a player
+        </NavLink>
+      </li>
 
-    <NavLink
-      to='/teams/new'
-      exact
-      style={link}
-      activeStyle={{
-      background: '#D1D0CE'
-    }}>Add a team</NavLink>
-
-    <NavLink
-      to='/players'
-      exact
-      style={link}
-      activeStyle={{
-      background: '#D1D0CE'
-    }}>Players</NavLink>
-
-
-    <NavLink
-    to='/players/new'
-    exact
-    style={link}
-    activeStyle={{
-      background: '#D1D0CE'
-    }}>Add a player</NavLink>
-
-    <NavLink
-    to='/teams/standings'
-    exact
-    style={link}
-    activeStyle={{
-      background: '#D1D0CE'
-    }}>Standings</NavLink>
+      <li>
+        <NavLink
+          to="/teams/standings"
+          exact
+          activeStyle={{
+            background: "#D1D0CE"
+          }}
+        >
+          Standings
+        </NavLink>
+      </li>
+    </ul>
   </div>
-
+);
 
 export default Navbar;
