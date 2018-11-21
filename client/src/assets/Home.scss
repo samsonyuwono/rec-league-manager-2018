@@ -1,9 +1,13 @@
 html {
-  overflow-y: hidden;
+  // overflow-y: hidden;
+}
+
+.home-container {
 }
 
 .home-banner {
-  position: relative;
+  // position: relative;
+  position: unset;
   text-align: center;
   color: white;
   h1 {

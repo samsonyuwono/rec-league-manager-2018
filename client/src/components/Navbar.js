@@ -1,10 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
 import "../assets/Navbar.scss";
 
 const Navbar = () => (
   <div className="nav-wrapper">
+    <div className="toggle-menu">
+      <div className="bars" />
+      <div className="bars" />
+      <div className="bars" />
+    </div>
     <ul className="nav-list">
       <li>
         <NavLink
