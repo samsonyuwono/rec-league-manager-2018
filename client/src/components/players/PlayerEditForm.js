@@ -36,27 +36,34 @@ class PlayerEditForm extends Component {
 
   render() {
     return (
-      <div className="editPlayerForm">
-        <h1>Update your player</h1>
+      <div className="form-wrapper">
+        <h1>Update your Player</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>
-          <label htmlFor="playerName">Player Name: </label>
-          <input type="text" name="name" onChange={this.handleOnChange} />
-          <br />
-
-          <label htmlFor="playerheight">Player Height: </label>
-          <input type="number" name="height" onChange={this.handleOnChange} />
-          <br />
-
-          <label htmlFor="playerWeight">Player Weight: </label>
-          <input type="number" name="weight" onChange={this.handleOnChange} />
-          <br />
-          <label htmlFor="playerImage">Player Image: </label>
-          <input type="text" name="image_url" onChange={this.handleOnChange} />
-          <br />
-
+          <div className="label-container">
+            <label htmlFor="playerName">Player Name: </label>
+            <input type="text" name="name" onChange={this.handleOnChange} />
+          </div>
+          <div className="label-container">
+            <label htmlFor="playerheight">Player Height: </label>
+            <input type="number" name="height" onChange={this.handleOnChange} />
+          </div>
+          <div className="label-container">
+            <label htmlFor="playerWeight">Player Weight: </label>
+            <input type="number" name="weight" onChange={this.handleOnChange} />
+          </div>
+          <div className="label-container">
+            <label htmlFor="playerImage">Player Image: </label>
+            <input
+              type="text"
+              name="image_url"
+              onChange={this.handleOnChange}
+            />
+          </div>
           <TeamDropDown />
 
-          <input type="submit" value="Edit Player" />
+          <button className="submit-button" type="submit">
+            Edit Player
+          </button>
         </form>
       </div>
     );

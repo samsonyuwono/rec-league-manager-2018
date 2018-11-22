@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updatePlayerFormData } from "../../actions/playerForm";
 import { getTeams } from "../../actions/teams";
+import "../../assets/Forms.scss";
 
 class TeamDropDown extends Component {
   componentDidMount() {
@@ -26,9 +27,10 @@ class TeamDropDown extends Component {
       );
     });
     return (
-      <div>
+      <div className="label-container">
         <label htmlFor="team_select">Select Team</label>
         <select
+          className="team-dropdown"
           value={this.props.teams._id}
           onChange={this.handleTeamSelect}
           name="team_select"

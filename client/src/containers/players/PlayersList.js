@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PlayerCard from "../../components/players/PlayerCard";
-import PlayerForm from "../../components/players/PlayerForm";
 import { fetchPlayers } from "../../actions/players";
 import "../../assets/Players.scss";
 
@@ -20,7 +19,6 @@ class PlayersList extends Component {
         {sortedPlayerHeight.map(player => (
           <PlayerCard key={player._id} player={player} />
         ))}
-        <PlayerForm />
         <br />
       </div>
     );

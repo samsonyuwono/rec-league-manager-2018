@@ -34,24 +34,28 @@ class TeamEditForm extends Component {
 
   render() {
     return (
-      <div className="editTeamForm">
-        <h1>Update your team</h1>
+      <div className="form-wrapper">
+        <h1>Update your Team</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>
-          <label htmlFor="teamName">Team Name: </label>
-          <input type="text" name="name" onChange={this.handleOnChange} />
-          <br />
-
-          <label htmlFor="teamWins">Team Wins: </label>
-          <input type="number" name="wins" onChange={this.handleOnChange} />
-          <br />
-
-          <label htmlFor="teamlosses">Team Losses: </label>
-          <input type="number" name="losses" onChange={this.handleOnChange} />
-          <br />
-          <label htmlFor="teamLogo">Team Logo: </label>
-          <input type="text" name="logo_url" onChange={this.handleOnChange} />
-          <br />
-          <input type="submit" value="Edit Team" />
+          <div className="label-container">
+            <label htmlFor="teamName">Team Name: </label>
+            <input type="text" name="name" onChange={this.handleOnChange} />
+          </div>
+          <div className="label-container">
+            <label htmlFor="teamWins">Team Wins: </label>
+            <input type="number" name="wins" onChange={this.handleOnChange} />
+          </div>
+          <div className="label-container">
+            <label htmlFor="teamlosses">Team Losses: </label>
+            <input type="number" name="losses" onChange={this.handleOnChange} />
+          </div>
+          <div className="label-container">
+            <label htmlFor="teamLogo">Team Logo: </label>
+            <input type="text" name="logo_url" onChange={this.handleOnChange} />
+          </div>
+          <button className="submit-button" type="submit">
+            Edit Team
+          </button>
         </form>
       </div>
     );

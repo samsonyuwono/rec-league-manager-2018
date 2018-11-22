@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import TeamCard from "../../components/teams/TeamCard";
-import TeamForm from "../../components/teams/TeamForm";
 import { getTeams, deleteTeam } from "../../actions/teams";
 import "../../assets/Teams.scss";
 
@@ -22,10 +21,7 @@ class TeamsList extends Component {
         <div key={this.props} className="col-md-4">
           {displayTeam}
         </div>
-        <div className="col-md-8">
-          {this.props.children}
-          <TeamForm />
-        </div>
+        <div className="col-md-8">{this.props.children}</div>
       </div>
     );
   }

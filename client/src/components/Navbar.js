@@ -16,7 +16,6 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log(this.state.showMenu);
     return (
       <div
         className={this.state.showMenu ? "toggle-list-wrapper" : "nav-wrapper"}

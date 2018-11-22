@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateTeamFormData } from "../../actions/teamForm";
 import { createTeam } from "../../actions/teams";
+import "../../assets/Forms.scss";
 
 class TeamForm extends Component {
   handleOnChange = event => {
@@ -20,10 +21,10 @@ class TeamForm extends Component {
   render() {
     const { name, wins, losses, logo_url } = this.props.teamFormData;
     return (
-      <div className="teamForm">
-        <h1>Add a team to the League</h1>
+      <div className="form-wrapper">
+        <h1>Add a team to your League</h1>
         <form onSubmit={this.handleOnSubmit}>
-          <div>
+          <div className="label-container">
             <label htmlFor="name">Name:</label>
             <input
               type="text"
@@ -32,7 +33,7 @@ class TeamForm extends Component {
               value={name}
             />
           </div>
-          <div>
+          <div className="label-container">
             <label htmlFor="wins">Wins:</label>
             <input
               type="number"
@@ -41,7 +42,7 @@ class TeamForm extends Component {
               value={wins}
             />
           </div>
-          <div>
+          <div className="label-container">
             <label htmlFor="losses">Losses:</label>
             <input
               type="number"
@@ -50,7 +51,7 @@ class TeamForm extends Component {
               value={losses}
             />
           </div>
-          <div>
+          <div className="label-container">
             <label htmlFor="logo_url">Logo url:</label>
             <input
               type="text"
@@ -60,7 +61,9 @@ class TeamForm extends Component {
             />
           </div>
 
-          <button type="submit">Add Team</button>
+          <button className="submit-button" type="submit">
+            Add Team
+          </button>
         </form>
       </div>
     );
