@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import "../assets/MobileNav.scss";
 import "../assets/Navbar.scss";
 
 class Navbar extends Component {
@@ -7,11 +8,13 @@ class Navbar extends Component {
     super(props);
     this.state = { showMenu: false };
   }
+
   toggle = event => {
     this.setState({
       showMenu: !this.state.showMenu
     });
   };
+
   render() {
     console.log(this.state.showMenu);
     return (

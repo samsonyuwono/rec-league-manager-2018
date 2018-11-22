@@ -1,11 +1,3 @@
-.nav-wrapper,
-.nav-list {
-  // flex-direction: column;
-}
-
-.toggle-menu {
-  display: inline-block;
-}
 .nav-wrapper {
   width: 100%;
   height: 7vh;
@@ -19,27 +11,10 @@
   background-color: #333;
   margin: 6px 0;
   cursor: pointer;
-  transition: 0.4s;
   @media only screen and (min-width: 768px) {
     display: none;
   }
 }
-//
-// .change .bar1 {
-//   -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-//   transform: rotate(-45deg) translate(-9px, 6px);
-// }
-//
-// /* Fade out the second bar */
-// .change .bar2 {
-//   opacity: 0;
-// }
-//
-// /* Rotate last bar */
-// .change .bar3 {
-//   -webkit-transform: rotate(45deg) translate(-8px, -8px);
-//   transform: rotate(45deg) translate(-8px, -8px);
-// }
 
 .nav-list {
   display: inline-block;
@@ -60,18 +35,5 @@
   }
   a:hover {
     background-color: #d1d0ce;
-  }
-}
-
-.toggle-list-wrapper {
-  height: 36vh;
-}
-
-.toggle-list {
-  display: contents;
-  list-style-type: none;
-
-  li {
-    line-height: 6vh;
   }
 }

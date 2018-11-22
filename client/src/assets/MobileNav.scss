@@ -1,0 +1,23 @@
+.toggle-menu {
+  display: inline-block;
+}
+.toggle-list-wrapper {
+  height: 38vh;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.toggle-list {
+  display: contents;
+  list-style-type: none;
+  li {
+    line-height: 5vh;
+  }
+  a {
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 12px;
+    margin: 0 6px 6px;
+    text-decoration: none;
+    color: white;
+  }
+}
