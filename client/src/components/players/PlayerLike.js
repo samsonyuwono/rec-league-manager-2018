@@ -22,7 +22,7 @@ class PlayerLike extends Component {
   render() {
     const likes = this.state.likes;
     return (
-      <div>
+      <div className="likebutton-wrapper">
         <button onClick={event => this.handleOnLike(this.props.likes)}>
           Like
         </button>

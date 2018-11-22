@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { increaseWin, increaseLoss } from "../../actions/teams";
 import { bindActionCreators } from "redux";
+import "../../assets/Teams.scss";
 
 class TeamWinLoss extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class TeamWinLoss extends Component {
     const wins = this.state.wins;
     const losses = this.state.losses;
     return (
-      <div>
+      <div className="winloss-wrapper">
         <button onClick={event => this.handleWin(this.props.wins)}>Wins</button>
         {wins}
         <button onClick={event => this.handleLoss(this.props.losses)}>

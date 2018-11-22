@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PlayerCard from "../../components/players/PlayerCard";
 import { fetchPlayers } from "../../actions/players";
 import "../../assets/Players.scss";
+import "../../assets/Teams.scss";
 
 class PlayersList extends Component {
   componentDidMount() {

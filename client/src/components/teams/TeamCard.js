@@ -5,21 +5,21 @@ import TeamWinLoss from "./TeamWinLoss";
 const TeamCard = ({ team }) => (
   <div key={team._id} className="TeamCard">
     <h3>{team.name}</h3>
-    <img
-      className="TeamImage"
-      key={team._id}
-      src={team.logo_url}
-      alt={team.name}
-    />
-    <div>
-      <Link style={{ marginBottom: "5px" }} to={`/teams/${team._id}`}>
+    <div className="image-wrapper">
+      <img
+        className="TeamImage"
+        key={team._id}
+        src={team.logo_url}
+        alt={team.name}
+      />
+    </div>
+    <div className="card-details">
+      <Link className="link-style" to={`/teams/${team._id}`}>
         Roster
       </Link>{" "}
-      <br />
-      <Link style={{ marginBottom: "5px" }} to={`/teams/${team._id}/edit`}>
+      <Link className="link-style" to={`/teams/${team._id}/edit`}>
         Edit Team
       </Link>{" "}
-      <br />
       <TeamWinLoss team={team._id} wins={team.wins} losses={team.losses} />
     </div>
   </div>
