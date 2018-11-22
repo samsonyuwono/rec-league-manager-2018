@@ -5,7 +5,6 @@
 
 .toggle-menu {
   display: inline-block;
-  float: left;
 }
 .nav-wrapper {
   width: 100%;
@@ -45,12 +44,12 @@
 .nav-list {
   display: inline-block;
   list-style-type: none;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
   li {
     float: left;
     line-height: 3vh;
-    @media only screen and (max-width: 768px) {
-      display: none;
-    }
   }
   a {
     text-transform: uppercase;
@@ -61,5 +60,18 @@
   }
   a:hover {
     background-color: #d1d0ce;
+  }
+}
+
+.toggle-list-wrapper {
+  height: 36vh;
+}
+
+.toggle-list {
+  display: contents;
+  list-style-type: none;
+
+  li {
+    line-height: 6vh;
   }
 }
