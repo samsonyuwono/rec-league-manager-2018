@@ -41,7 +41,9 @@ class PlayerShow extends Component {
       <div>
         <h1> Player </h1>
         <h2>{playerShow()}</h2>
-        <button onClick={this.handleOnDelete}>Delete Player</button>
+        <button className="submit-button" onClick={this.handleOnDelete}>
+          Delete Player
+        </button>
       </div>
     );
   }

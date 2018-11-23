@@ -5,14 +5,12 @@ import TeamWinLoss from "./TeamWinLoss";
 const TeamCard = ({ team }) => (
   <div key={team._id} className="TeamCard">
     <h3>{team.name}</h3>
-    <div className="image-wrapper">
-      <img
-        className="TeamImage"
-        key={team._id}
-        src={team.logo_url}
-        alt={team.name}
-      />
-    </div>
+    <img
+      className="TeamImage"
+      key={team._id}
+      src={team.logo_url}
+      alt={team.name}
+    />
     <div className="card-details">
       <Link className="link-style" to={`/teams/${team._id}`}>
         Roster

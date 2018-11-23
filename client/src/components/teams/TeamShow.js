@@ -47,7 +47,9 @@ class TeamShow extends Component {
         <h1> Roster </h1>
         <h2>{teamShow()}</h2>
         <PlayerForm />
-        <button onClick={this.handleOnDelete}>Delete Team</button>
+        <button className="submit-button" onClick={this.handleOnDelete}>
+          Delete Team
+        </button>
       </div>
     );
   }
