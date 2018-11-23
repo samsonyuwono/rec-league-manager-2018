@@ -9,8 +9,7 @@ class PlayerShow extends Component {
   }
 
   handleOnDelete = () => {
-    const playerId = this.props.match.params.id;
-    this.props.deletePlayer(playerId);
+    this.props.deletePlayer(this.props.match.params.id);
     this.props.history.push("/");
   };
 

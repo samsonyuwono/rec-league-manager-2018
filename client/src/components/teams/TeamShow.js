@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PlayerForm from "../players/PlayerForm";
 import { connect } from "react-redux";
 import { getTeams, deleteTeam } from "../../actions/teams";
 import { fetchPlayers } from "../../actions/players";
+import "../../assets/TeamShow.scss";
 
 class TeamShow extends Component {
   componentDidMount() {
@@ -12,8 +14,7 @@ class TeamShow extends Component {
 
   handleOnDelete = event => {
     event.preventDefault();
-    const teamId = this.props.match.params.id;
-    this.props.deleteTeam(teamId);
+    this.props.deleteTeam(this.props.match.params.id);
     this.props.history.push("/");
   };
 
@@ -24,28 +25,32 @@ class TeamShow extends Component {
       const sortedTeamPlayers = players.filter(
         player => player.team_id === teamId
       );
-      if (sortedTeamPlayers.length === 0) {
-        return <p>Please add players to your roster in the form below.</p>;
-      } else {
-        return sortedTeamPlayers.map(player => {
+      return sortedTeamPlayers.length === 0 ? (
+        <p>Please add players to your roster in the form below.</p>
+      ) : (
+        sortedTeamPlayers.map(player => {
           return (
-            <div key={player._id}>
+            <div key={player._id} className="player-wrapper">
               <img
-                className="PlayerShow"
+                className="PlayerImage"
                 src={player.image_url}
                 alt={player.name}
               />
-              <br />
-              {player.name}
+              <h2>{player.name}</h2>
+              <div className="view-player">
+                <Link className="link-style" to={`/players/${player._id}`}>
+                  View Player
+                </Link>{" "}
+              </div>
             </div>
           );
-        });
-      }
+        })
+      );
     };
     return (
       <div>
         <h1> Roster </h1>
-        <h2>{teamShow()}</h2>
+        {teamShow()}
         <PlayerForm />
         <button className="submit-button" onClick={this.handleOnDelete}>
           Delete Team
