@@ -1,28 +1,26 @@
 .tr-style {
   padding: 32px;
+  font-size: 3vw;
   float: left;
-
-  height: 400px;
-  width: 50%;
-  margin: auto;
-
-}
-
-th{
-  border-bottom: 1pt solid black;
-}
-
-td{
-  height: 50px;
-  vertical-align: bottom;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  padding: 15px;
-  width: 20%
-}
-
-th{
-  text-align: right;
-  padding: 15px;
-  width: 10%
+  width: 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+  th {
+    border-bottom: 1pt solid black;
+    text-align: right;
+    width: 18vw;
+  }
+  td {
+    height: 60px;
+    vertical-align: bottom;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    width: 20%;
+  }
+  tr:nth-child(even) {
+    background: #ccc;
+  }
+  tr:nth-child(odd) {
+    background: #fff;
+  }
 }

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { getTeams } from "../../actions/teams";
 import { fetchPlayers } from "../../actions/players";
 import { deletePlayer } from "../../actions/players";
 import "../../assets/Show.scss";
 
 class PlayerShow extends Component {
   componentDidMount() {
+    this.props.getTeams();
     this.props.fetchPlayers();
   }
 
@@ -47,11 +49,12 @@ class PlayerShow extends Component {
 
 const mapStateToProps = state => {
   return {
+    teams: state.teams,
     players: state.players
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchPlayers, deletePlayer }
+  { getTeams, fetchPlayers, deletePlayer }
 )(PlayerShow);
