@@ -11,7 +11,6 @@ router.get("/players", (req, res) => {
 });
 
 router.post("/teams/:teamId/player", (req, res) => {
-  console.log(req.body.team_id);
   Team.findOne({ _id: req.params.teamId }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));

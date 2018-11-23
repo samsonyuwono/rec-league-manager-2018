@@ -17,7 +17,6 @@ export default (state = [], action) => {
       return newTeamState;
 
     case "DELETE_TEAM":
-      debugger;
       return [
         ...state.slice(0, action.teamId),
         ...state.slice(action.teamId + 1)

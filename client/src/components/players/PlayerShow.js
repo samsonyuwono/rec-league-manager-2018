@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPlayers } from "../../actions/players";
 import { deletePlayer } from "../../actions/players";
+import "../../assets/Show.scss";
 
 class PlayerShow extends Component {
   componentDidMount() {
@@ -20,18 +21,14 @@ class PlayerShow extends Component {
       const sortedPlayers = players.filter(player => player._id === playerId);
       return sortedPlayers.map(player => {
         return (
-          <div key={player._id}>
+          <div key={player._id} className="player-wrapper">
             <img
-              className="PlayerShow"
+              className="PlayerImage"
               src={player.image_url}
               alt={player.name}
             />
-            <br />
-            <label>{player.name}</label>
-            <br />
-            Height: {player.height} cm
-            <br />
-            Height: {player.weight} lb
+            <h2>{player.name}</h2>
+            <p>Height: {player.height} cm</p> <p>Weight: {player.weight} lb</p>
           </div>
         );
       });

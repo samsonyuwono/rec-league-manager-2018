@@ -47,12 +47,12 @@ router.post("/teams", (req, res) => {
 router.put("/teams/:id", (req, res) => {
   Team.findById(req.params.id, (error, team) => {
     if (error) return res.json({ success: false, error });
-    const { name, wins, losses, logo_url } = req.body;
+    const { name, wins, losses, logo_url, likes } = req.body;
     if (name) team.name = name;
     if (wins) team.wins = wins;
     if (losses) team.losses = losses;
     if (logo_url) team.logo_url = logo_url;
-    console.log(team);
+    if (logo_url) team.likes = likes;
     team.save(error => {
       if (error) return res.json({ success: false, error });
       return res.json({ success: true });
@@ -74,15 +74,6 @@ router.delete("/teams/:id", (req, res) => {
     }
   );
 });
-
-// router.get("/teams/:teamId/players", (req, res) => {
-//   Team.findById(req.params.teamId)
-//     .populate("players")
-//     .exec((err, team) => {
-//       if (err) return res.status(400).send(err);
-//       res.json(team.players);
-//     });
-// });
 
 router.use("/api", router);
 

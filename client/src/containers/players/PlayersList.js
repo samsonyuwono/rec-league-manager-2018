@@ -20,7 +20,6 @@ class PlayersList extends Component {
         {sortedPlayerHeight.map(player => (
           <PlayerCard key={player._id} player={player} />
         ))}
-        <br />
       </div>
     );
   }

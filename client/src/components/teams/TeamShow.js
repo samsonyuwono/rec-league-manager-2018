@@ -4,7 +4,7 @@ import PlayerForm from "../players/PlayerForm";
 import { connect } from "react-redux";
 import { getTeams, deleteTeam } from "../../actions/teams";
 import { fetchPlayers } from "../../actions/players";
-import "../../assets/TeamShow.scss";
+import "../../assets/Show.scss";
 
 class TeamShow extends Component {
   componentDidMount() {
