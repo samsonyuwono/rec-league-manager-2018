@@ -132,7 +132,7 @@ export const increaseLoss = (losses, teamId) => {
 
   return dispatch => {
     return fetch(`${API_URL}/teams/${teamId}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
