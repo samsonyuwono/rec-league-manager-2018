@@ -2,20 +2,16 @@
   padding: 32px;
   font-size: 3vw;
   float: left;
-  width: 100%;
-  margin-left: 20%;
-  margin-right: 25%;
+  margin-left: 15%;
   th {
-    text-align: right;
-    width: 21vw;
+    width: 16vw;
     text-decoration: underline;
   }
   td {
-    height: 60px;
-    vertical-align: bottom;
+    height: 75px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    width: 20%;
+    width: 16vw;
   }
   tr:nth-child(even) {
     background: #ccc;

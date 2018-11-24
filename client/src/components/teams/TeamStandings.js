@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import { connect } from "react-redux";
 import { getTeams } from "../../actions/teams";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
@@ -24,6 +23,10 @@ class TeamStandings extends Component {
       );
     };
 
+    const percentage = (cell, row) => {
+      return <div>{(row.wins / (row.wins + row.losses)).toFixed(3)}</div>;
+    };
+
     return (
       <BootstrapTable
         key={this.props.teams._id}
@@ -43,6 +46,10 @@ class TeamStandings extends Component {
         <TableHeaderColumn dataField="wins">W</TableHeaderColumn>
 
         <TableHeaderColumn dataField="losses">L</TableHeaderColumn>
+
+        <TableHeaderColumn dataField="%" dataFormat={percentage}>
+          %
+        </TableHeaderColumn>
       </BootstrapTable>
     );
   }
