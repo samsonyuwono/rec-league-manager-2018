@@ -22,7 +22,7 @@ class TeamForm extends Component {
     const { name, wins, losses, logo_url } = this.props.teamFormData;
     return (
       <div className="form-wrapper">
-        <h1>Add a team to your League</h1>
+        <h1>Add a Team to your League</h1>
         <form onSubmit={this.handleOnSubmit}>
           <div className="label-container">
             <label htmlFor="name">Name:</label>

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
 import { getTeams } from "../../actions/teams";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
@@ -13,6 +15,15 @@ class TeamStandings extends Component {
     const sortedTeamWins = this.props.teams.sort((a, b) => {
       return b.wins - a.wins;
     });
+
+    const nameFormat = (cell, row) => {
+      return (
+        <Link className="link-style" to={`/teams/${row._id}`}>
+          {cell}
+        </Link>
+      );
+    };
+
     return (
       <BootstrapTable
         key={this.props.teams._id}
@@ -25,11 +36,13 @@ class TeamStandings extends Component {
           ID{" "}
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="name"> Name </TableHeaderColumn>
+        <TableHeaderColumn dataField="name" dataFormat={nameFormat}>
+          Team
+        </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="wins"> Wins </TableHeaderColumn>
+        <TableHeaderColumn dataField="wins">W</TableHeaderColumn>
 
-        <TableHeaderColumn dataField="losses"> Losses </TableHeaderColumn>
+        <TableHeaderColumn dataField="losses">L</TableHeaderColumn>
       </BootstrapTable>
     );
   }
