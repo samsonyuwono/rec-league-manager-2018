@@ -2,11 +2,12 @@ var express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose"),
-  path = require("path"),
   favicon = require("serve-favicon"),
   logger = require("morgan"),
   cors = require("cors"),
   app = express().use("*", cors());
+
+const path = require("path");
 
 const router = express.Router(),
   API_PORT = process.env.API_PORT || 3001;
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(teamRoute);
 app.use(playerRoute);
-app.use(express.static("views"));
+app.use(express.static(path.join(__dirname, "client", "build")));
 app.use(logger("dev"));
 
 app.use((req, res, next) => {
@@ -38,4 +39,7 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.API_PORT || 3001;
-app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

@@ -1,6 +1,7 @@
 {
   "name": "rec-league-manager-2018",
   "version": "0.1.0",
+  "main": "index.js",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
@@ -35,6 +36,8 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && yarn install --only=dev && npm install && npm run build",
     "start:server": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
     "start:client": "cd client && yarn start",
     "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\"",
@@ -51,5 +54,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0"
+  },
+  "engines": {
+    "node": "10.9.0"
   }
 }
