@@ -1,7 +1,6 @@
 {
   "name": "rec-league-manager-2018",
   "version": "0.1.0",
-  "main": "index.js",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
@@ -22,7 +21,6 @@
     "nodemon": "^1.18.4",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "prop-type": "^0.0.1",
     "react": "^16.5.0",
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-table": "^4.3.1",
@@ -36,12 +34,13 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "start:server": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
     "start:client": "cd client && yarn start",
     "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\"",
-    "start-watch": "nodemon index.js"
+    "start-watch": "nodemon index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
@@ -51,8 +50,5 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0"
-  },
-  "engines": {
-    "node": "10.9.0"
   }
 }
