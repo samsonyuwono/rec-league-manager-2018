@@ -36,8 +36,12 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "start:server": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
+    "start:client": "cd client && yarn start",
+    "start:dev": "concurrently \"yarn start:server\" \"yarn start:client\"",
+    "start-watch": "nodemon index.js"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
