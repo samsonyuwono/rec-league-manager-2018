@@ -34,9 +34,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
-    "start": "concurrently \"start:server\" \"start:client\"",
-    "start:server": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
-    "start:client": "cd client && npm start",
+    "start": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
     "start-watch": "nodemon index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
