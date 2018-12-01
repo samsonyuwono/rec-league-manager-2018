@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema,
-  mongoUrl = require("../secrets");
+  mongoUrl = require("../config/secrets");
 
 mongoose.connect(mongoUrl.secrets.dbUri);
 
