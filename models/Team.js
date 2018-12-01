@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema,
   mongoUrl = require("../config/secrets");
 
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("../config/prod");
+} else {
+  module.exports = require("../config/secrets");
+}
 mongoose.connect(mongoUrl.secrets.dbUri);
 
 var TeamSchema = new Schema(
