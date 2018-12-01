@@ -11,9 +11,11 @@ var express = require("express"),
 const router = express.Router(),
   API_PORT = process.env.API_PORT || 3001;
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-// }
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./config/prod");
+} else {
+  module.exports = require("./config/secrets");
+}
 
 let teamRoute = require("./routes/team"),
   playerRoute = require("./routes/player");
