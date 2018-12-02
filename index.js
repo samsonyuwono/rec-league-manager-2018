@@ -9,7 +9,6 @@ var express = require("express"),
   app = express().use("*", cors());
 
 const router = express.Router(),
-  API_PORT = process.env.API_PORT || 3001,
   keys = require("./config/keys");
 
 mongoose.connect(keys.mongoURI);
@@ -39,5 +38,5 @@ app.use((err, req, res, next) => {
   res.render("error");
 });
 
-const PORT = process.env.API_PORT || 3001;
-app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
+const PORT = process.env.API_PORT || 5000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

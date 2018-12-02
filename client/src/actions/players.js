@@ -2,7 +2,7 @@ import { resetPlayerForm } from "./playerForm";
 
 // const API_URL = process.env.REACT_APP_API_URL;
 
-let API_URL = "http://localhost:3001/api";
+let API_URL = "http://localhost:5000/api";
 
 const setPlayers = players => {
   return {
