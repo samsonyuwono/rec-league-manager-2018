@@ -9,14 +9,10 @@ var express = require("express"),
   app = express().use("*", cors());
 
 const router = express.Router(),
-  API_PORT = process.env.API_PORT || 3001;
+  API_PORT = process.env.API_PORT || 3001,
+  keys = require("./config/keys");
 
-if (process.env.NODE_ENV === "production") {
-  module.exports = require("./config/prod");
-} else {
-  module.exports = require("./config/secrets");
-}
-
+mongoose.connect(keys.mongoURI);
 let teamRoute = require("./routes/team"),
   playerRoute = require("./routes/player");
 
