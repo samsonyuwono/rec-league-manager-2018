@@ -36,7 +36,8 @@
     "yarn": "^1.3.2"
   },
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
+    "start": "concurrently \"yarn start:server\" \"yarn start:client\"",
+    "start:server": "nodemon ./index.js --exec babel-node --presets es2015,stage-0",
     "start:client": "cd client && yarn start",
     "start-watch": "nodemon index.js",
     "build": "react-scripts build",
