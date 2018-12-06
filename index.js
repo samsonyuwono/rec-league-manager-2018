@@ -11,12 +11,14 @@ const router = express.Router(),
 
 mongoose.connect(keys.mongoURI);
 let teamRoute = require("./routes/team"),
-  playerRoute = require("./routes/player");
+  playerRoute = require("./routes/player"),
+  authRoute = require("./routes/auth");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(teamRoute);
 app.use(playerRoute);
+app.use(authRoute);
 app.use(express.static("views"));
 app.use(logger("dev"));
 

@@ -1,31 +1,25 @@
-var mongoose = require("mongoose");
-var passport = require("passport");
-var settings = require("../config/settings");
+const express = require("express"),
+  jwt = require("jsonwebtoken"),
+  passport = require("passport"),
+  router = express.Router(),
+  User = require("../models/User");
 require("../config/passport")(passport);
-var express = require("express");
-var jwt = require("jsonwebtoken");
-var router = express.Router();
-var User = require("../models/user");
 
-router.post("/register", function(req, res) {
-  if (!req.body.username || !req.body.password) {
-    res.json({
+router.post("/register", (req, res) => {
+  const user = new User();
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.json({
       success: false,
-      msg: "Please choose another username and password."
-    });
-  } else {
-    var newUser = new User({
-      username: req.body.username,
-      password: req.body.password
-    });
-    // save the user
-    newUser.save(function(err) {
-      if (err) {
-        return res.json({ success: false, msg: "Username already exists." });
-      }
-      res.json({ success: true, msg: "Successfully created a new user." });
+      error: "You forgot to fill in a section."
     });
   }
+  user.username = username;
+  user.password = password;
+  user.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, msg: "Successfully created new user." });
+  });
 });
 
 router.post("/login", function(req, res) {
@@ -60,5 +54,7 @@ router.post("/login", function(req, res) {
     }
   );
 });
+
+router.use("/api", router);
 
 module.exports = router;

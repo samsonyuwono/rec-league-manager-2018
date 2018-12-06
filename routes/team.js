@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var Team = require("../models/Team.js");
-var Player = require("../models/Player.js");
+var Team = require("../models/Team");
+var Player = require("../models/Player");
 
 router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");

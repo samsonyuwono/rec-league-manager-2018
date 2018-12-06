@@ -10,6 +10,8 @@ import PlayersList from "./players/PlayersList";
 import PlayerForm from "../components/players/PlayerForm";
 import PlayerShow from "../components/players/PlayerShow";
 import PlayerEditForm from "../components/players/PlayerEditForm";
+import Login from "../components/Login";
+import Register from "../components/Register";
 import Navbar from "../components/Navbar";
 
 import "./../assets/App.scss";
@@ -22,6 +24,8 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/teams/standings" component={TeamStandings} />
             <Route exact path="/teams/new" component={TeamForm} />
             <Route exact path="/teams/:id" component={TeamShow} />
