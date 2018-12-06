@@ -4,9 +4,7 @@ var express = require("express"),
   mongoose = require("mongoose"),
   path = require("path"),
   favicon = require("serve-favicon"),
-  logger = require("morgan"),
-  cors = require("cors"),
-  app = express().use("*", cors());
+  logger = require("morgan");
 
 const router = express.Router(),
   keys = require("./config/keys");
@@ -27,15 +25,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).send("We think you are lost");
-});
-
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-  res.status(err.status || 500);
-  res.render("error");
 });
 
 const PORT = process.env.PORT || 5000;
