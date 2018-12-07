@@ -2,7 +2,9 @@ const express = require("express"),
   jwt = require("jsonwebtoken"),
   passport = require("passport"),
   router = express.Router(),
-  User = require("../models/User");
+  User = require("../models/User"),
+  keys = require("../config/keys");
+
 require("../config/passport")(passport);
 
 router.post("/register", (req, res) => {
@@ -40,7 +42,7 @@ router.post("/login", function(req, res) {
         user.comparePassword(req.body.password, function(err, isMatch) {
           if (isMatch && !err) {
             // if user is found and password is right create a token
-            var token = jwt.sign(user.toJSON(), settings.secret);
+            var token = jwt.sign(user.toJSON(), keys.secret);
             // return the information including token as JSON
             res.json({ success: true, token: "JWT " + token });
           } else {
