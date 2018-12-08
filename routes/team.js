@@ -1,20 +1,31 @@
-var express = require("express");
-var router = express.Router();
-var Team = require("../models/Team");
-var Player = require("../models/Player");
+var express = require("express"),
+  router = express.Router(),
+  Team = require("../models/Team"),
+  Player = require("../models/Player"),
+  passport = require("passport");
+require("../config/passport")(passport);
 
 router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");
 });
 
-router.get("/teams", (req, res) => {
-  Team.find(req.params.id)
-    .populate("players")
-    .exec((err, teams) => {
-      if (err) return res.status(400).send(err);
-      res.json(teams);
-    });
-});
+router.get(
+  "/teams",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    var token = getToken(req.headers);
+    if (token) {
+      Team.find(req.params.id)
+        .populate("players")
+        .exec((err, teams) => {
+          if (err) return res.status(400).send(err);
+          res.json(teams);
+        });
+    } else {
+      return res.status(403).send({ success: false, msg: "Unauthorized." });
+    }
+  }
+);
 
 router.get("/teams/:id", (req, res) => {
   Team.findById(req.params.id)
@@ -25,24 +36,33 @@ router.get("/teams/:id", (req, res) => {
     });
 });
 
-router.post("/teams", (req, res) => {
-  const team = new Team();
-  const { name, wins, losses, logo_url } = req.body;
-  if (!name || !wins || !losses || !logo_url) {
-    return res.json({
-      success: false,
-      error: "You forgot to fill in a section"
-    });
+router.post(
+  "/teams",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const team = new Team();
+    var token = getToken(req.headers);
+
+    const { name, wins, losses, logo_url } = req.body;
+    if (!name || !wins || !losses || !logo_url || !token) {
+      return res.json({
+        success: false,
+        error: "You forgot to fill in a section"
+      });
+    } else if (token) {
+      team.name = name;
+      team.wins = wins;
+      team.losses = losses;
+      team.logo_url = logo_url;
+      team.save(err => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
+      });
+    } else {
+      return res.status(403).send({ success: false, msg: "Unauthorized." });
+    }
   }
-  team.name = name;
-  team.wins = wins;
-  team.losses = losses;
-  team.logo_url = logo_url;
-  team.save(err => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true });
-  });
-});
+);
 
 router.put("/teams/:id", (req, res) => {
   Team.findById(req.params.id, (error, team) => {

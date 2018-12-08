@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var TeamSchema = new Schema(
   {
+    _id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
     wins: { type: Number, required: true, minlength: 1 },
     losses: { type: Number, required: true, minlength: 1 },
