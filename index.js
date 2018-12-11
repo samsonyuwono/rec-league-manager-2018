@@ -10,8 +10,8 @@ const router = express.Router(),
   keys = require("./config/keys");
 
 mongoose.connect(keys.mongoURI);
-let teamRoute = require("./routes/team"),
-  playerRoute = require("./routes/player"),
+let teamRoute = require("./routes/teams"),
+  playerRoute = require("./routes/players"),
   authRoute = require("./routes/auth");
 
 app.use(bodyParser.json());

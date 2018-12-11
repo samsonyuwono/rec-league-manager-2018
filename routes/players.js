@@ -8,6 +8,11 @@ router.get("/players", checkAuth, (req, res) => {
   Player.find((err, players) => {
     if (err) return res.json({ success: false, error: err });
     return res.json(players);
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
   });
 });
 
@@ -37,12 +42,19 @@ router.post("/teams/:teamId/player", checkAuth, (req, res) => {
 });
 
 router.get("/players/:id", checkAuth, (req, res) => {
-  Player.findById(req.params.id).then(id => {
-    if (!id) {
-      return res.json({ success: false, error: "No player id provided" });
-    }
-    return res.status(200).json(id);
-  });
+  Player.findById(req.params.id)
+    .then(id => {
+      if (!id) {
+        return res.json({ success: false, error: "No player id provided" });
+      }
+      return res.status(200).json(id);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 router.put("/players/:id", checkAuth, (req, res) => {
@@ -62,7 +74,7 @@ router.put("/players/:id", checkAuth, (req, res) => {
   });
 });
 
-router.delete("/players/:id", (req, res) => {
+router.delete("/players/:id", checkAuth, (req, res) => {
   Player.remove(
     {
       _id: req.params.id
@@ -74,7 +86,12 @@ router.delete("/players/:id", (req, res) => {
         message: " Player successfully removed!"
       });
     }
-  );
+  ).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
 });
 
 router.use("/api", router);
