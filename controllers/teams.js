@@ -1,6 +1,6 @@
 const Team = require("../models/Team.js");
 
-exports.teams_get_all = (req, res, next) => {
+exports.teams_get_all = (req, res) => {
   Team.find(req.params.id)
     .populate("players")
     .exec((err, teams) => {
@@ -20,6 +20,7 @@ exports.teams_get_team = (req, res) => {
 
 exports.teams_create_team = (req, res) => {
   const team = new Team();
+  console.log(team);
   const { name, wins, losses, logo_url } = req.body;
   if (!name || !wins || !losses || !logo_url) {
     return res.json({
@@ -57,7 +58,7 @@ exports.teams_edit_team = (req, res) => {
 };
 
 exports.teams_delete_team = (req, res) => {
-  Team.remove(
+  Team.deleteOne(
     {
       _id: req.params.id
     },

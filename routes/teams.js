@@ -1,9 +1,8 @@
 const express = require("express"),
   router = express.Router(),
-  Team = require("../models/Team.js"),
-  Player = require("../models/Player.js"),
   checkAuth = require("../middleware/check-auth"),
-  TeamsController = require("../controllers/teams");
+  TeamsController = require("../controllers/teams"),
+  mongoose = require("mongoose");
 
 router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");
