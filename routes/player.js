@@ -1,16 +1,17 @@
-var express = require("express");
-var router = express.Router();
-var Team = require("../models/Team.js");
-var Player = require("../models/Player.js");
+const express = require("express"),
+  router = express.Router(),
+  Team = require("../models/Team.js"),
+  Player = require("../models/Player.js"),
+  checkAuth = require("../middleware/check-auth");
 
-router.get("/players", (req, res) => {
+router.get("/players", checkAuth, (req, res) => {
   Player.find((err, players) => {
     if (err) return res.json({ success: false, error: err });
     return res.json(players);
   });
 });
 
-router.post("/teams/:teamId/player", (req, res) => {
+router.post("/teams/:teamId/player", checkAuth, (req, res) => {
   Team.findOne({ _id: req.params.teamId }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));
@@ -35,7 +36,7 @@ router.post("/teams/:teamId/player", (req, res) => {
   });
 });
 
-router.get("/players/:id", (req, res) => {
+router.get("/players/:id", checkAuth, (req, res) => {
   Player.findById(req.params.id).then(id => {
     if (!id) {
       return res.json({ success: false, error: "No player id provided" });
@@ -44,7 +45,7 @@ router.get("/players/:id", (req, res) => {
   });
 });
 
-router.put("/players/:id", (req, res) => {
+router.put("/players/:id", checkAuth, (req, res) => {
   Player.findById(req.params.id, (error, player) => {
     if (error) return res.json({ success: false, error });
     const { name, height, weight, image_url, likes, team_id } = req.body;

@@ -1,33 +1,23 @@
-var express = require("express"),
+const express = require("express"),
   router = express.Router(),
-  Team = require("../models/Team"),
-  Player = require("../models/Player"),
-  passport = require("passport");
-require("../config/passport")(passport);
+  Team = require("../models/Team.js"),
+  Player = require("../models/Player.js"),
+  checkAuth = require("../middleware/check-auth");
 
 router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");
 });
 
-router.get(
-  "/teams",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    var token = getToken(req.headers);
-    if (token) {
-      Team.find(req.params.id)
-        .populate("players")
-        .exec((err, teams) => {
-          if (err) return res.status(400).send(err);
-          res.json(teams);
-        });
-    } else {
-      return res.status(403).send({ success: false, msg: "Unauthorized." });
-    }
-  }
-);
+router.get("/teams", checkAuth, (req, res) => {
+  Team.find(req.params.id)
+    .populate("players")
+    .exec((err, teams) => {
+      if (err) return res.status(400).send(err);
+      res.json(teams);
+    });
+});
 
-router.get("/teams/:id", (req, res) => {
+router.get("/teams/:id", checkAuth, (req, res) => {
   Team.findById(req.params.id)
     .populate("players")
     .exec((err, team) => {
@@ -36,35 +26,28 @@ router.get("/teams/:id", (req, res) => {
     });
 });
 
-router.post(
-  "/teams",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const team = new Team();
-    var token = getToken(req.headers);
-
-    const { name, wins, losses, logo_url } = req.body;
-    if (!name || !wins || !losses || !logo_url || !token) {
-      return res.json({
-        success: false,
-        error: "You forgot to fill in a section"
-      });
-    } else if (token) {
-      team.name = name;
-      team.wins = wins;
-      team.losses = losses;
-      team.logo_url = logo_url;
-      team.save(err => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
-      });
-    } else {
-      return res.status(403).send({ success: false, msg: "Unauthorized." });
-    }
+router.post("/teams", checkAuth, (req, res) => {
+  const team = new Team();
+  console.log(req.body);
+  const { name, wins, losses, logo_url } = req.body;
+  if (!name || !wins || !losses || !logo_url) {
+    return res.json({
+      success: false,
+      error: "You forgot to fill in a section"
+    });
   }
-);
 
-router.put("/teams/:id", (req, res) => {
+  team.name = name;
+  team.wins = wins;
+  team.losses = losses;
+  team.logo_url = logo_url;
+  team.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
+router.put("/teams/:id", checkAuth, (req, res) => {
   Team.findById(req.params.id, (error, team) => {
     if (error) return res.json({ success: false, error });
     const { name, wins, losses, logo_url, likes } = req.body;
@@ -80,7 +63,7 @@ router.put("/teams/:id", (req, res) => {
   });
 });
 
-router.delete("/teams/:id", (req, res) => {
+router.delete("/teams/:id", checkAuth, (req, res) => {
   Team.remove(
     {
       _id: req.params.id
