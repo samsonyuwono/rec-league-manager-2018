@@ -19,29 +19,23 @@ exports.teams_get_team = (req, res) => {
 };
 
 exports.teams_create_team = (req, res) => {
-  const team = new Team();
-  console.log(team);
-  const { name, wins, losses, logo_url } = req.body;
-  if (!name || !wins || !losses || !logo_url) {
-    return res.json({
-      success: false,
-      error: "You forgot to fill in a section"
-    });
-  }
-
-  team.name = name;
-  team.wins = wins;
-  team.losses = losses;
-  team.logo_url = logo_url;
-  team.save(err => {
+  req.body.author = req.userData.userId;
+  const team = new Team(req.body).save(err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
   });
 };
 
+const confirmOwner = (team, user) => {
+  if (!team.author.equals(user._id)) {
+    throw Error("You must own team to edit it");
+  }
+};
+
 exports.teams_edit_team = (req, res) => {
   (req, res) => {
     Team.findById(req.params.id, (error, team) => {
+      confirmOwner(team, req.user);
       if (error) return res.json({ success: false, error });
       const { name, wins, losses, logo_url, likes } = req.body;
       if (name) team.name = name;

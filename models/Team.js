@@ -7,7 +7,12 @@ var TeamSchema = new Schema(
     wins: { type: Number, required: true, minlength: 1 },
     losses: { type: Number, required: true, minlength: 1 },
     logo_url: { type: String, required: true },
-    players: [{ type: Schema.Types.ObjectId, ref: "Player" }]
+    players: [{ type: Schema.Types.ObjectId, ref: "Player" }],
+    author: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: "Someone needs to create a team"
+    }
   },
   { timestamps: true }
 );
