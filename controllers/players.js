@@ -1,6 +1,8 @@
 const Player = require("../models/Player.js"),
   Team = require("../models/Team.js");
 
+//show user's players
+
 exports.players_get_all = (req, res) => {
   Player.find((err, players) => {
     if (err) return res.json({ success: false, error: err });
@@ -11,6 +13,23 @@ exports.players_get_all = (req, res) => {
       error: err
     });
   });
+};
+
+//show user's players
+exports.players_get_player = (req, res) => {
+  Player.findById(req.params.id)
+    .then(id => {
+      if (!id) {
+        return res.json({ success: false, error: "No player id provided" });
+      }
+      return res.status(200).json(id);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 };
 
 exports.players_create_player = (req, res) => {
@@ -39,22 +58,6 @@ exports.players_create_player = (req, res) => {
   });
 };
 
-exports.players_get_player = (req, res) => {
-  Player.findById(req.params.id)
-    .then(id => {
-      if (!id) {
-        return res.json({ success: false, error: "No player id provided" });
-      }
-      return res.status(200).json(id);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
-};
-
 exports.players_edit_player = (req, res) => {
   req.body.author = req.userData.userId;
   Player.findById(req.params.id, (error, player) => {
@@ -76,21 +79,18 @@ exports.players_edit_player = (req, res) => {
 };
 
 exports.players_delete_player = (req, res) => {
-  Player.deleteOne(
-    {
-      _id: req.params.id
-    },
-    (error, team) => {
-      if (error) return res.json({ success: false, error: "Doesn't work" });
+  req.body.author = req.userData.userId;
+
+  Player.findById(req.params.id, (error, player) => {
+    if (!player.author.equals(req.body.author)) {
       return res.json({
-        success: true,
-        message: " Player successfully removed!"
+        success: false,
+        error: "You can't delete another user's player"
       });
     }
-  ).catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error: err
+    player.remove(error => {
+      if (error) return res.json({ success: false, error });
+      return res.json({ success: true });
     });
   });
 };

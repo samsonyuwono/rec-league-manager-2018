@@ -1,5 +1,7 @@
 const Team = require("../models/Team.js");
 
+//show user's teams
+
 exports.teams_get_all = (req, res) => {
   Team.find(req.params.id)
     .populate("players")
@@ -8,6 +10,7 @@ exports.teams_get_all = (req, res) => {
       res.json(teams);
     });
 };
+//show user's team
 
 exports.teams_get_team = (req, res) => {
   Team.findById(req.params.id)
@@ -36,7 +39,7 @@ exports.teams_edit_team = (req, res) => {
   req.body.author = req.userData.userId;
   Team.findById(req.params.id, (error, team) => {
     if (!team.author.equals(req.body.author)) {
-      throw Error("You must edit your own team");
+      throw Error("You don't have permissions for that");
     }
     const { name, wins, losses, logo_url, likes } = req.body;
     if (name) team.name = name;
@@ -57,7 +60,7 @@ exports.teams_delete_team = (req, res) => {
     if (!team.author.equals(req.body.author)) {
       return res.json({
         success: false,
-        error: "That team doesn't belong to you"
+        error: "You can't delete another user's team"
       });
     }
     team.remove(error => {
