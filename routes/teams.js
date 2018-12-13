@@ -8,7 +8,7 @@ router.get("/teams/error", (req, res) => {
   throw new Error("this is a forced error");
 });
 
-router.get("/teams", TeamsController.teams_get_all);
+router.get("/teams", checkAuth, TeamsController.teams_get_all);
 
 router.get("/teams/:id", checkAuth, TeamsController.teams_get_team);
 

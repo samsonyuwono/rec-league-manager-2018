@@ -14,6 +14,7 @@ exports.players_get_all = (req, res) => {
 };
 
 exports.players_create_player = (req, res) => {
+  req.body.author = req.userData.userId;
   Team.findOne({ _id: req.params.teamId }, (err, team) => {
     if (err) return res.status(400).send(err);
     if (!team) return res.status(400).send(new Error("No team"));
@@ -24,10 +25,10 @@ exports.players_create_player = (req, res) => {
         weight: req.body.weight,
         image_url: req.body.image_url,
         likes: req.body.likes,
-        team_id: req.body.team_id
+        team_id: req.body.team_id,
+        author: req.body.author
       },
       (err, player) => {
-        if (err) return res.status(400).send(err);
         team.players.push(player);
         team.save(err => {
           if (err) return res.status(400).send(err);
@@ -55,8 +56,11 @@ exports.players_get_player = (req, res) => {
 };
 
 exports.players_edit_player = (req, res) => {
+  req.body.author = req.userData.userId;
   Player.findById(req.params.id, (error, player) => {
-    if (error) return res.json({ success: false, error });
+    if (!player.author.equals(req.body.author)) {
+      throw Error("You must edit your own team");
+    }
     const { name, height, weight, image_url, likes, team_id } = req.body;
     if (name) player.name = name;
     if (height) player.height = height;

@@ -1,6 +1,25 @@
 const Team = require("../models/Team.js");
 
+// exports.teams_get_all = (req, res) => {
+//   req.body.author = req.userData.userId;
+//   Team.find(req.params.id)
+//     .populate("players")
+//     .exec((err, teams) => {
+//       let teamAuthor = teams.forEach(team => {
+//         console.log(team.author);
+//         return team.author;
+//       });
+//       console.log(teamAuthor);
+//       if (!teamAuthor.equals(req.body.author)) {
+//         throw Error("You must edit your own team");
+//       }
+//       if (err) return res.status(400).send(err);
+//       res.json(teams);
+//     });
+// };
+
 exports.teams_get_all = (req, res) => {
+  req.body.author = req.userData.userId;
   Team.find(req.params.id)
     .populate("players")
     .exec((err, teams) => {

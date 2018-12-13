@@ -3,7 +3,7 @@ const express = require("express"),
   checkAuth = require("../middleware/check-auth"),
   PlayersController = require("../controllers/players");
 
-router.get("/players", checkAuth, PlayersController.players_get_all);
+router.get("/players", PlayersController.players_get_all);
 
 router.post(
   "/teams/:teamId/player",
