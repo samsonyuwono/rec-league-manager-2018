@@ -1,25 +1,6 @@
 const Team = require("../models/Team.js");
 
-// exports.teams_get_all = (req, res) => {
-//   req.body.author = req.userData.userId;
-//   Team.find(req.params.id)
-//     .populate("players")
-//     .exec((err, teams) => {
-//       let teamAuthor = teams.forEach(team => {
-//         console.log(team.author);
-//         return team.author;
-//       });
-//       console.log(teamAuthor);
-//       if (!teamAuthor.equals(req.body.author)) {
-//         throw Error("You must edit your own team");
-//       }
-//       if (err) return res.status(400).send(err);
-//       res.json(teams);
-//     });
-// };
-
 exports.teams_get_all = (req, res) => {
-  req.body.author = req.userData.userId;
   Team.find(req.params.id)
     .populate("players")
     .exec((err, teams) => {
@@ -71,21 +52,17 @@ exports.teams_edit_team = (req, res) => {
 };
 
 exports.teams_delete_team = (req, res) => {
-  Team.deleteOne(
-    {
-      _id: req.params.id
-    },
-    (error, team) => {
-      if (error) return res.json({ success: false, error: "Doesn't work" });
+  req.body.author = req.userData.userId;
+  Team.findById(req.params.id, (error, team) => {
+    if (!team.author.equals(req.body.author)) {
       return res.json({
-        success: true,
-        message: " Team successfully removed!"
+        success: false,
+        error: "That team doesn't belong to you"
       });
     }
-  ).catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error: err
+    team.remove(error => {
+      if (error) return res.json({ success: false, error });
+      return res.json({ success: true });
     });
   });
 };
