@@ -16,7 +16,7 @@ router.post("/teams", checkAuth, TeamsController.teams_create_team);
 
 router.put("/teams/:id", checkAuth, TeamsController.teams_edit_team);
 
-router.delete("/teams/:id", TeamsController.teams_delete_team);
+router.delete("/teams/:id", checkAuth, TeamsController.teams_delete_team);
 
 router.use("/api", router);
 

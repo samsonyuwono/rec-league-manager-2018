@@ -26,29 +26,29 @@ exports.teams_create_team = (req, res) => {
   });
 };
 
-const confirmOwner = (team, user) => {
-  if (!team.author.equals(user._id)) {
-    throw Error("You must own team to edit it");
-  }
-};
+// const confirmOwner = (team, user) => {
+//   if (!team.author.equals(user._id)) {
+//     throw Error("You must edit your own team");
+//   }
+// };
 
 exports.teams_edit_team = (req, res) => {
-  (req, res) => {
-    Team.findById(req.params.id, (error, team) => {
-      confirmOwner(team, req.user);
+  req.body.author = req.userData.userId;
+  Team.findById(req.params.id, (error, team) => {
+    if (!team.author.equals(req.body.author)) {
+      throw Error("You must edit your own team");
+    }
+    const { name, wins, losses, logo_url, likes } = req.body;
+    if (name) team.name = name;
+    if (wins) team.wins = wins;
+    if (losses) team.losses = losses;
+    if (logo_url) team.logo_url = logo_url;
+    if (likes) team.likes = likes;
+    team.save(error => {
       if (error) return res.json({ success: false, error });
-      const { name, wins, losses, logo_url, likes } = req.body;
-      if (name) team.name = name;
-      if (wins) team.wins = wins;
-      if (losses) team.losses = losses;
-      if (logo_url) team.logo_url = logo_url;
-      if (logo_url) team.likes = likes;
-      team.save(error => {
-        if (error) return res.json({ success: false, error });
-        return res.json({ success: true });
-      });
+      return res.json({ success: true });
     });
-  };
+  });
 };
 
 exports.teams_delete_team = (req, res) => {

@@ -67,7 +67,7 @@ exports.auth_get_user = (req, res, next) => {
             },
             keys.secret,
             {
-              expiresIn: "1h"
+              expiresIn: "5h"
             }
           );
           return res.status(200).json({
