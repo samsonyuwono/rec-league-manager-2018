@@ -1,6 +1,5 @@
 const Team = require("../models/Team.js");
-
-//show user's teams
+const User = require("../models/User.js");
 
 exports.teams_get_all = (req, res) => {
   Team.find(req.params.id)
@@ -10,10 +9,27 @@ exports.teams_get_all = (req, res) => {
       res.json(teams);
     });
 };
-//show user's team
+
+exports.teams_get_user_teams = (req, res) => {
+  req.body.author = req.userData.userId;
+  Team.find({ author: req.body.author })
+    .populate("players")
+    .exec((err, teams) => {
+      if (err) return res.status(400).send(err);
+      res.json(teams);
+    });
+};
 
 exports.teams_get_team = (req, res) => {
-  Team.findById(req.params.id)
+  req.body.author = req.userData.userId;
+  Team.findById(req.params.id, (error, team) => {
+    if (!team.author.equals(req.body.author)) {
+      return res.json({
+        success: false,
+        error: "You don't have permissions to view that team"
+      });
+    }
+  })
     .populate("players")
     .exec((err, team) => {
       if (err) return res.status(400).send(err);
@@ -28,12 +44,6 @@ exports.teams_create_team = (req, res) => {
     return res.json({ success: true });
   });
 };
-
-// const confirmOwner = (team, user) => {
-//   if (!team.author.equals(user._id)) {
-//     throw Error("You must edit your own team");
-//   }
-// };
 
 exports.teams_edit_team = (req, res) => {
   req.body.author = req.userData.userId;
