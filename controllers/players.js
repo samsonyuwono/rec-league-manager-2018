@@ -1,35 +1,36 @@
 const Player = require("../models/Player.js"),
   Team = require("../models/Team.js");
 
-//show user's players
-
 exports.players_get_all = (req, res) => {
   Player.find((err, players) => {
     if (err) return res.json({ success: false, error: err });
     return res.json(players);
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error: err
-    });
   });
 };
 
-//show user's players
+exports.players_get_user_players = (req, res) => {
+  req.body.author = req.userData.userId;
+  Player.find({ author: req.body.author }).then((err, players) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json(players);
+  });
+};
+
 exports.players_get_player = (req, res) => {
-  Player.findById(req.params.id)
-    .then(id => {
-      if (!id) {
-        return res.json({ success: false, error: "No player id provided" });
-      }
-      return res.status(200).json(id);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
+  req.body.author = req.userData.userId;
+  Player.findById(req.params.id, (error, player) => {
+    if (!player.author.equals(req.body.author)) {
+      return res.json({
+        success: false,
+        error: "You don't have permissions to view that player"
       });
-    });
+    }
+  }).then(id => {
+    if (!id) {
+      return res.json({ success: false, error: "No player id provided" });
+    }
+    return res.status(200).json(id);
+  });
 };
 
 exports.players_create_player = (req, res) => {
@@ -60,6 +61,7 @@ exports.players_create_player = (req, res) => {
 
 exports.players_edit_player = (req, res) => {
   req.body.author = req.userData.userId;
+
   Player.findById(req.params.id, (error, player) => {
     if (!player.author.equals(req.body.author)) {
       throw Error("You must edit your own team");

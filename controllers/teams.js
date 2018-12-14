@@ -1,10 +1,9 @@
 const Team = require("../models/Team.js");
-const User = require("../models/User.js");
 
 exports.teams_get_all = (req, res) => {
   Team.find(req.params.id)
     .populate("players")
-    .exec((err, teams) => {
+    .then((err, teams) => {
       if (err) return res.status(400).send(err);
       res.json(teams);
     });
@@ -14,7 +13,7 @@ exports.teams_get_user_teams = (req, res) => {
   req.body.author = req.userData.userId;
   Team.find({ author: req.body.author })
     .populate("players")
-    .exec((err, teams) => {
+    .then((err, teams) => {
       if (err) return res.status(400).send(err);
       res.json(teams);
     });
@@ -31,7 +30,7 @@ exports.teams_get_team = (req, res) => {
     }
   })
     .populate("players")
-    .exec((err, team) => {
+    .then((err, team) => {
       if (err) return res.status(400).send(err);
       res.json(team);
     });

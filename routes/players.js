@@ -5,6 +5,12 @@ const express = require("express"),
 
 router.get("/players", PlayersController.players_get_all);
 
+router.get(
+  "/user/players",
+  checkAuth,
+  PlayersController.players_get_user_players
+);
+
 router.post(
   "/teams/:teamId/player",
   checkAuth,
