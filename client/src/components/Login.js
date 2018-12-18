@@ -1,92 +1,93 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
+let API_URL = "http://localhost:5000/api";
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
-      message: ""
+      errors: {},
+      isLoading: false
     };
   }
-  onChange = e => {
-    const state = this.state;
-    state[e.target.name] = e.target.value;
-    this.setState(state);
+  j;
+  handleOnChange = event => {
+    const { value, name } = event.target;
+    console.log(event.target);
+    this.setState({
+      [name]: value
+    });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-
-    const { username, password } = this.state;
-
-    axios
-      .post("/api/auth/login", { username, password })
-      .then(result => {
-        localStorage.setItem("jwtToken", result.data.token);
-        this.setState({ message: "" });
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          this.setState({
-            message: "Login failed. Username or password not match"
-          });
-        }
-      });
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const userData = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    console.log(userData);
   };
+
+  // handleOnSubmit = event => {
+  //   event.preventDefault();
+  //   fetch(`${API_URL}/regi`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       mode: "no-cors"
+  //     },
+  //     body: JSON.stringify(this.state)
+  //   })
+  //     .then(res => {
+  //       if (res.status === 200) {
+  //         this.props.history.push("/");
+  //         console.log("success!");
+  //       } else {
+  //         const error = new Error(res.error);
+  //         throw error;
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //       alert("Error logging in please try again");
+  //     });
+  // };
 
   render() {
-    const { username, password, message } = this.state;
+    const { errors } = this.state;
     return (
-      <div className="container">
-        <form className="form-signin" onSubmit={this.onSubmit}>
-          {message !== "" && (
-            <div className="alert alert-warning alert-dismissible" role="alert">
-              {message}
-            </div>
-          )}
-          <h2 className="form-signin-heading">Please sign in</h2>
-          <label htmlFor="inputEmail" className="sr-only">
-            Email address
-          </label>
+      <div>
+        <div style={{ marginTop: "4rem" }} className="row">
+          <Link to="/" className="btn-flat waves-effect">
+            Back to home
+          </Link>
+          <p className="grey-text text-darken-1">
+            <Link to="/register">Need to register?</Link>
+          </p>
+          <h1> Login Here</h1>
+        </div>
+        <form onSubmit={this.handleOnSubmit}>
           <input
-            type="email"
-            className="form-control"
-            placeholder="Email address"
+            type="text"
             name="username"
-            value={username}
-            onChange={this.onChange}
-            required
+            placeholder="Enter username"
+            value={this.state.username}
+            onChange={this.handleOnChange}
+            error={errors.username}
           />
-          <label htmlFor="inputPassword" className="sr-only">
-            Password
-          </label>
           <input
-            type="password"
-            className="form-control"
-            placeholder="Password"
+            type="text"
             name="password"
-            value={password}
-            onChange={this.onChange}
-            required
+            placeholder="Enter password"
+            value={this.state.password}
+            onChange={this.handleOnChange}
+            error={errors.password}
           />
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
+          <button type="submit-button" value="Submit">
             Login
           </button>
-          <p>
-            Not a member?{" "}
-            <Link to="/register">
-              <span
-                className="glyphicon glyphicon-plus-sign"
-                aria-hidden="true"
-              />{" "}
-              Register here
-            </Link>
-          </p>
         </form>
       </div>
     );

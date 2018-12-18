@@ -13,6 +13,7 @@ import PlayerEditForm from "../components/players/PlayerEditForm";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Navbar from "../components/Navbar";
+import Landing from "../components/Landing";
 
 import "./../assets/App.scss";
 

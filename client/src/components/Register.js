@@ -1,64 +1,92 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
-
-class Create extends Component {
-  constructor() {
-    super();
+let API_URL = "http://localhost:5000/api";
+class Register extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      password2: "",
+      errors: {}
     };
   }
-  onChange = e => {
-    const state = this.state;
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-
-    const { username, password } = this.state;
-
-    axios.post("/api/auth/register", { username, password }).then(result => {
-      this.props.history.push("/login");
+  handleOnChange = event => {
+    const { value, name } = event.target;
+    console.log(event.target);
+    this.setState({
+      [name]: value
     });
   };
 
+  handleOnSubmit = event => {
+    event.preventDefault();
+    const newUser = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    console.log(newUser);
+  };
+
+  // handleOnSubmit = event => {
+  //   return fetch(`${API_URL}/register`, {
+  //     method: "POST",
+  //     mode: "no-cors",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(this.state)
+  //   })
+  //     .then(response => {
+  //       console.log(response);
+  //       if (response.status === 200) {
+  //         this.props.history.push("/teams");
+  //         alert("Success!");
+  //         console.log("success!");
+  //       } else {
+  //         const error = new Error(response.error);
+  //         throw error;
+  //       }
+  //       response.json();
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //       alert(err);
+  //     });
+  // };
+
   render() {
-    const { username, password } = this.state;
+    const { errors } = this.state;
     return (
-      <div class="container">
-        <form class="form-signin" onSubmit={this.onSubmit}>
-          <h2 class="form-signin-heading">Register</h2>
-          <label for="inputEmail" class="sr-only">
-            Email address
-          </label>
+      <div>
+        <div style={{ marginTop: "4rem" }} className="row">
+          <Link to="/" className="btn-flat waves-effect">
+            Back to home
+          </Link>
+          <p className="grey-text text-darken-1">
+            <Link to="/login">Already have an account?</Link>
+          </p>
+        </div>
+        <h1>Register Here</h1>
+        <form onSubmit={this.handleOnSubmit}>
           <input
-            type="email"
-            class="form-control"
-            placeholder="Email address"
+            type="text"
             name="username"
-            value={username}
-            onChange={this.onChange}
-            required
+            placeholder="Enter username"
+            value={this.state.username}
+            onChange={this.handleOnChange}
+            error={errors.username}
           />
-          <label for="inputPassword" class="sr-only">
-            Password
-          </label>
           <input
-            type="password"
-            class="form-control"
-            placeholder="Password"
+            type="text"
             name="password"
-            value={password}
-            onChange={this.onChange}
-            required
+            placeholder="Enter password"
+            value={this.state.password}
+            onChange={this.handleOnChange}
+            error={errors.password}
           />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Register
+          <button type="submit-button" value="Submit">
+            Submit
           </button>
         </form>
       </div>
@@ -66,4 +94,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default Register;
