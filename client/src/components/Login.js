@@ -86,7 +86,7 @@ class Login extends Component {
             error={errors.password}
           />
           <button type="submit-button" value="Submit">
-            Login
+            Submit
           </button>
         </form>
       </div>

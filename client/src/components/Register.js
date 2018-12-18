@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 let API_URL = "http://localhost:5000/api";
 class Register extends Component {
   constructor(props) {
@@ -7,7 +9,6 @@ class Register extends Component {
     this.state = {
       username: "",
       password: "",
-      password2: "",
       errors: {}
     };
   }
@@ -20,40 +21,12 @@ class Register extends Component {
   };
 
   handleOnSubmit = event => {
-    event.preventDefault();
-    const newUser = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    console.log(newUser);
-  };
+    const { username, password } = this.state;
 
-  // handleOnSubmit = event => {
-  //   return fetch(`${API_URL}/register`, {
-  //     method: "POST",
-  //     mode: "no-cors",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(this.state)
-  //   })
-  //     .then(response => {
-  //       console.log(response);
-  //       if (response.status === 200) {
-  //         this.props.history.push("/teams");
-  //         alert("Success!");
-  //         console.log("success!");
-  //       } else {
-  //         const error = new Error(response.error);
-  //         throw error;
-  //       }
-  //       response.json();
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //       alert(err);
-  //     });
-  // };
+    axios.post("/api/register", { username, password }).then(result => {
+      this.props.history.push("/");
+    });
+  };
 
   render() {
     const { errors } = this.state;
