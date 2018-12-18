@@ -4,12 +4,16 @@ import teams from "./reducers/teams";
 import players from "./reducers/players";
 import teamFormData from "./reducers/teamFormData";
 import playerFormData from "./reducers/playerFormData";
+import auth from "./reducers/auth";
+import errorReducers from "./reducers/errorReducers";
 
 const reducers = combineReducers({
   teams,
   teamFormData,
   players,
-  playerFormData
+  playerFormData,
+  auth,
+  errorReducers
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

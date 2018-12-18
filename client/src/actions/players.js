@@ -1,42 +1,12 @@
 import { resetPlayerForm } from "./playerForm";
-
+import {
+  setPlayers,
+  addPlayer,
+  updatePlayer,
+  destroyPlayer,
+  incrementLike
+} from "./types/playerTypes";
 let API_URL = "https://rec-league-manager.herokuapp.com/api";
-
-const setPlayers = players => {
-  return {
-    type: "FETCH_PLAYERS",
-    players
-  };
-};
-
-const addPlayer = player => {
-  return {
-    type: "CREATE_PLAYER_SUCCESS",
-    player
-  };
-};
-
-const updatePlayer = playerFormData => {
-  return {
-    type: "UPDATE_PLAYER_SUCCESS",
-    playerFormData
-  };
-};
-
-const destroyPlayer = playerId => {
-  return {
-    type: "DELETE_PLAYER",
-    playerId
-  };
-};
-
-const incrementLike = (likes, playerId) => {
-  return {
-    type: "INCREASE_LIKE",
-    likes,
-    playerId
-  };
-};
 
 export const fetchPlayers = () => {
   return dispatch => {

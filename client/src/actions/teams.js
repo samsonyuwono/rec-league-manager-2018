@@ -1,51 +1,14 @@
 import { resetTeamForm } from "./teamForm";
+import {
+  setTeams,
+  addTeam,
+  updateTeam,
+  destroyTeam,
+  incrementWin,
+  incrementLoss
+} from "./types/teamTypes";
 // let API_URL = process.env.REACT_APP_API_URL;
-
 let API_URL = "https://rec-league-manager.herokuapp.com/api";
-
-const setTeams = teams => {
-  return {
-    type: "GET_TEAMS_SUCCESS",
-    teams
-  };
-};
-
-const addTeam = team => {
-  return {
-    type: "CREATE_TEAM_SUCCESS",
-    team
-  };
-};
-
-const updateTeam = teamFormData => {
-  return {
-    type: "UPDATE_TEAM_SUCCESS",
-    teamFormData
-  };
-};
-
-const destroyTeam = teamId => {
-  return {
-    type: "DELETE_TEAM",
-    teamId
-  };
-};
-
-export const incrementWin = (wins, teamId) => {
-  return {
-    type: "INCREASE_WIN",
-    wins,
-    teamId
-  };
-};
-
-export const incrementLoss = (losses, teamId) => {
-  return {
-    type: "INCREASE_LOSS",
-    losses,
-    teamId
-  };
-};
 
 export const getTeams = () => {
   return dispatch => {
