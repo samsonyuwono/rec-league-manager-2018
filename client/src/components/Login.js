@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-let API_URL = "http://localhost:5000/api";
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
+      loggedIn: false,
       errors: {},
       isLoading: false
     };
@@ -23,11 +24,21 @@ class Login extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    const userData = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    console.log(userData);
+    const { username, password } = this.state;
+    axios
+      .post("/api/login", { username, password })
+      .then(result => {
+        localStorage.setItem("jwtToken", result.data.token);
+        this.setState({ loggedIn: true });
+        this.props.history.push("/");
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          this.setState({
+            message: "Login failed. Username or password not match"
+          });
+        }
+      });
   };
 
   // handleOnSubmit = event => {
@@ -78,7 +89,7 @@ class Login extends Component {
             error={errors.username}
           />
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter password"
             value={this.state.password}

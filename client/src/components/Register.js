@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-let API_URL = "http://localhost:5000/api";
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,6 @@ class Register extends Component {
   }
   handleOnChange = event => {
     const { value, name } = event.target;
-    console.log(event.target);
     this.setState({
       [name]: value
     });
@@ -24,7 +22,7 @@ class Register extends Component {
     const { username, password } = this.state;
 
     axios.post("/api/register", { username, password }).then(result => {
-      this.props.history.push("/");
+      this.props.history.push("/login");
     });
   };
 
