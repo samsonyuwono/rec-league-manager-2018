@@ -16,7 +16,6 @@ class Login extends Component {
   j;
   handleOnChange = event => {
     const { value, name } = event.target;
-    console.log(event.target);
     this.setState({
       [name]: value
     });
@@ -28,43 +27,18 @@ class Login extends Component {
     axios
       .post("/api/login", { username, password })
       .then(result => {
+        console.log(result);
         localStorage.setItem("jwtToken", result.data.token);
         this.setState({ loggedIn: true });
+        debugger;
         this.props.history.push("/");
       })
       .catch(error => {
         if (error.response.status === 401) {
-          this.setState({
-            message: "Login failed. Username or password not match"
-          });
+          alert("Login failed. Username or password not match");
         }
       });
   };
-
-  // handleOnSubmit = event => {
-  //   event.preventDefault();
-  //   fetch(`${API_URL}/regi`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       mode: "no-cors"
-  //     },
-  //     body: JSON.stringify(this.state)
-  //   })
-  //     .then(res => {
-  //       if (res.status === 200) {
-  //         this.props.history.push("/");
-  //         console.log("success!");
-  //       } else {
-  //         const error = new Error(res.error);
-  //         throw error;
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //       alert("Error logging in please try again");
-  //     });
-  // };
 
   render() {
     const { errors } = this.state;
@@ -81,12 +55,13 @@ class Login extends Component {
         </div>
         <form onSubmit={this.handleOnSubmit}>
           <input
-            type="text"
+            type="username"
             name="username"
             placeholder="Enter username"
             value={this.state.username}
             onChange={this.handleOnChange}
             error={errors.username}
+            required
           />
           <input
             type="password"
@@ -95,6 +70,7 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleOnChange}
             error={errors.password}
+            required
           />
           <button type="submit-button" value="Submit">
             Submit

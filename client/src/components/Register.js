@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 class Register extends Component {
   constructor(props) {
@@ -10,6 +9,8 @@ class Register extends Component {
       password: "",
       errors: {}
     };
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
   handleOnChange = event => {
     const { value, name } = event.target;
@@ -19,11 +20,9 @@ class Register extends Component {
   };
 
   handleOnSubmit = event => {
-    const { username, password } = this.state;
-
-    axios.post("/api/register", { username, password }).then(result => {
-      this.props.history.push("/login");
-    });
+    event.preventDefault();
+    this.props.registerUser(this.state);
+    // this.props.history.push("/login");
   };
 
   render() {
@@ -41,20 +40,22 @@ class Register extends Component {
         <h1>Register Here</h1>
         <form onSubmit={this.handleOnSubmit}>
           <input
-            type="text"
+            type="username"
             name="username"
             placeholder="Enter username"
             value={this.state.username}
             onChange={this.handleOnChange}
             error={errors.username}
+            required
           />
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter password"
             value={this.state.password}
             onChange={this.handleOnChange}
             error={errors.password}
+            required
           />
           <button type="submit-button" value="Submit">
             Submit
