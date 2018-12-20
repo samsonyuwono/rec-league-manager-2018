@@ -27,13 +27,11 @@ exports.auth_create_user = (req, res, next) => {
             user
               .save()
               .then(result => {
-                console.log(result);
                 res.status(201).json({
                   message: "Successfully created new user"
                 });
               })
               .catch(err => {
-                console.log(err);
                 res.status(500).json({
                   error: err
                 });
@@ -81,7 +79,6 @@ exports.auth_get_user = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -97,7 +94,6 @@ exports.auth_delete_user = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
