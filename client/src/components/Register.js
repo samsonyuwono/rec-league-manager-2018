@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/auth";
+import { addFlashMessage } from "../actions/flashMessages";
 
 class Register extends Component {
   constructor(props) {
@@ -22,7 +25,11 @@ class Register extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     this.props.registerUser(this.state);
-    // this.props.history.push("/login");
+    this.props.addFlashMessage({
+      type: "success",
+      text: "You've signed up successfuly. Welcome"
+    });
+    this.props.history.push("/login");
   };
 
   render() {
@@ -38,7 +45,7 @@ class Register extends Component {
           </p>
         </div>
         <h1>Register Here</h1>
-        <form onSubmit={this.handleOnSubmit}>
+        <form onSubmit={this.handleOnSubmit.bind(this)}>
           <input
             type="username"
             name="username"
@@ -65,5 +72,7 @@ class Register extends Component {
     );
   }
 }
-
-export default Register;
+export default connect(
+  null,
+  { registerUser, addFlashMessage }
+)(Register);

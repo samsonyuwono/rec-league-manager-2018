@@ -11,9 +11,9 @@ import PlayerForm from "../components/players/PlayerForm";
 import PlayerShow from "../components/players/PlayerShow";
 import PlayerEditForm from "../components/players/PlayerEditForm";
 import Login from "../components/Login";
-import RegisterPage from "../components/RegisterPage";
+import Register from "../components/Register";
 import Navbar from "../components/Navbar";
-import Landing from "../components/Landing";
+import FlashMessagesList from "../components/FlashMessagesList";
 
 import "./../assets/App.scss";
 
@@ -23,10 +23,11 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar />
+          <FlashMessagesList />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={RegisterPage} />
+            <Route exact path="/register" component={Register} />
             <Route exact path="/teams/standings" component={TeamStandings} />
             <Route exact path="/teams/new" component={TeamForm} />
             <Route exact path="/teams/:id" component={TeamShow} />

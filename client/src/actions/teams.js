@@ -6,7 +6,7 @@ import {
   destroyTeam,
   incrementWin,
   incrementLoss
-} from "./types/teamTypes";
+} from "./creators/teamTypes";
 // let API_URL = process.env.REACT_APP_API_URL;
 let API_URL = "https://rec-league-manager.herokuapp.com/api";
 

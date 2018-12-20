@@ -1,4 +1,4 @@
-import { GET_ERRORS } from "../actions/types/authTypes";
+import { GET_ERRORS } from "../actions/creators/authTypes";
 const initialState = {};
 export default function(state = initialState, action) {
   switch (action.type) {

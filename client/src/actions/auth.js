@@ -6,7 +6,7 @@ import {
   GET_CURRENT_USER,
   SET_CURRENT_USER,
   USER_LOADING
-} from "./types/authTypes";
+} from "./creators/authTypes";
 // Register User
 export const registerUser = (userData, history) => {
   return dispatch => {
@@ -14,7 +14,6 @@ export const registerUser = (userData, history) => {
       .post("/api/register", userData)
       .then(result => {
         console.log(result);
-        // this.props.history.push("/login");
       })
       .catch(error => {
         if (error.response.status === 401) {

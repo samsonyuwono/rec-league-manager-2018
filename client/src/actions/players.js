@@ -5,7 +5,7 @@ import {
   updatePlayer,
   destroyPlayer,
   incrementLike
-} from "./types/playerTypes";
+} from "./creators/playerTypes";
 let API_URL = "https://rec-league-manager.herokuapp.com/api";
 
 export const fetchPlayers = () => {
