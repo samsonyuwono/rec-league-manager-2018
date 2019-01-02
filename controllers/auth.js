@@ -54,7 +54,7 @@ exports.auth_get_user = (req, res, next) => {
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Auth failed"
+            errors: { form: "Authentication failed" }
           });
         }
         if (result) {
@@ -74,7 +74,7 @@ exports.auth_get_user = (req, res, next) => {
           });
         }
         res.status(401).json({
-          message: "Unauthorized login"
+          errors: { form: "Unauthorized login" }
         });
       });
     })

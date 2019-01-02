@@ -6,6 +6,9 @@ import "./assets/index.scss";
 import App from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 import store from "./store.js";
+import setAuthToken from "./utils/setAuthToken";
+
+setAuthToken(localStorage.jwtToken);
 
 ReactDOM.render(
   <Provider store={store}>

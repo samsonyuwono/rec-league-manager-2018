@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/auth";
 import { addFlashMessage } from "../actions/flashMessages";
@@ -12,7 +11,8 @@ class Login extends Component {
       username: "",
       password: "",
       loggedIn: false,
-      isLoading: false
+      isLoading: false,
+      errors: {}
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
@@ -28,17 +28,18 @@ class Login extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     const { username, password } = this.state;
-    this.setState({ loggedIn: true, isLoading: true });
-    this.props.loginUser(this.state);
-    this.props.addFlashMessage({
-      type: "success",
-      text: "You've logged in successfully"
-    });
-    this.props.history.push("/");
+    this.setState({ loggedIn: true });
+    this.props
+      .loginUser(this.state)
+      .then(
+        res => this.props.history.push("/"),
+        err =>
+          this.setState({ errors: err.response.data.errors, loggedIn: true })
+      );
   };
 
   render() {
-    const { username, password, loggedIn, isLoading } = this.state;
+    const { errors, username, password, loggedIn, isLoading } = this.state;
     return (
       <div>
         <div style={{ marginTop: "4rem" }} className="row">
@@ -51,12 +52,17 @@ class Login extends Component {
           <h1> Login Here</h1>
         </div>
         <form onSubmit={this.handleOnSubmit}>
+          {errors.form && (
+            <div className="alert alert-danger">{errors.form}</div>
+          )}
+
           <input
             type="username"
             name="username"
             placeholder="Enter username"
             value={this.state.username}
             onChange={this.handleOnChange}
+            error={errors.username}
             required
           />
           <input
@@ -64,6 +70,7 @@ class Login extends Component {
             name="password"
             placeholder="Enter password"
             value={this.state.password}
+            error={errors.password}
             onChange={this.handleOnChange}
             required
           />
