@@ -9,8 +9,7 @@ class Register extends Component {
     super(props);
     this.state = {
       username: "",
-      password: "",
-      errors: {}
+      password: ""
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
@@ -52,7 +51,6 @@ class Register extends Component {
             placeholder="Enter username"
             value={this.state.username}
             onChange={this.handleOnChange}
-            error={errors.username}
             required
           />
           <input
@@ -61,7 +59,6 @@ class Register extends Component {
             placeholder="Enter password"
             value={this.state.password}
             onChange={this.handleOnChange}
-            error={errors.password}
             required
           />
           <button type="submit-button" value="Submit">

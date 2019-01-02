@@ -8,7 +8,6 @@ class FlashMessage extends Component {
   }
 
   handleOnClick() {
-    debugger;
     this.props.deleteFlashMessage(this.props.message.id);
   }
   render() {

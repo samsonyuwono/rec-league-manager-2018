@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import { loginUser } from "../actions/auth";
+import { addFlashMessage } from "../actions/flashMessages";
 
 class Login extends Component {
   constructor(props) {
@@ -9,11 +12,12 @@ class Login extends Component {
       username: "",
       password: "",
       loggedIn: false,
-      errors: {},
       isLoading: false
     };
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
-  j;
+
   handleOnChange = event => {
     const { value, name } = event.target;
     this.setState({
@@ -24,24 +28,17 @@ class Login extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     const { username, password } = this.state;
-    axios
-      .post("/api/login", { username, password })
-      .then(result => {
-        console.log(result);
-        localStorage.setItem("jwtToken", result.data.token);
-        this.setState({ loggedIn: true });
-        debugger;
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          alert("Login failed. Username or password not match");
-        }
-      });
+    this.setState({ loggedIn: true, isLoading: true });
+    this.props.loginUser(this.state);
+    this.props.addFlashMessage({
+      type: "success",
+      text: "You've logged in successfully"
+    });
+    this.props.history.push("/");
   };
 
   render() {
-    const { errors } = this.state;
+    const { username, password, loggedIn, isLoading } = this.state;
     return (
       <div>
         <div style={{ marginTop: "4rem" }} className="row">
@@ -60,7 +57,6 @@ class Login extends Component {
             placeholder="Enter username"
             value={this.state.username}
             onChange={this.handleOnChange}
-            error={errors.username}
             required
           />
           <input
@@ -69,10 +65,9 @@ class Login extends Component {
             placeholder="Enter password"
             value={this.state.password}
             onChange={this.handleOnChange}
-            error={errors.password}
             required
           />
-          <button type="submit-button" value="Submit">
+          <button type="submit-button" value="Submit" disabled={isLoading}>
             Submit
           </button>
         </form>
@@ -81,4 +76,7 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(
+  null,
+  { loginUser, addFlashMessage }
+)(Login);

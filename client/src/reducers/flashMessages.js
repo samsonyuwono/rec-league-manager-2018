@@ -14,7 +14,6 @@ export default (state = [], action = {}) => {
       ];
 
     case "DELETE_FLASH_MESSAGE":
-      debugger;
       return state.filter(message => message.id !== action.id);
     default:
       return state;
