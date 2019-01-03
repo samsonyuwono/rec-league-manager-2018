@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Login from "./Login";
+import { connect } from "react-redux";
 import "../assets/MobileNav.scss";
 import "../assets/Navbar.scss";
 
@@ -17,6 +18,134 @@ class Navbar extends Component {
   };
 
   render() {
+    const { isAuthenticated } = this.props.auth;
+
+    const userLinks = (
+      <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
+        <li>
+          <NavLink
+            to="/"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Home
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/teams"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Teams
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/teams/new"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Add a team
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/players"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Players
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/players/new"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Add a player
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/teams/standings"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Standings
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/logout"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Logout
+          </NavLink>
+        </li>
+      </ul>
+    );
+
+    const guestLinks = (
+      <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
+        <li>
+          <NavLink
+            to="/"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Home
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/register"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Sign Up
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/login"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Login
+          </NavLink>
+        </li>
+      </ul>
+    );
     return (
       <div
         className={this.state.showMenu ? "toggle-list-wrapper" : "nav-wrapper"}
@@ -26,82 +155,16 @@ class Navbar extends Component {
           <div className="bars" />
           <div className="bars" />
         </div>
-        <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
-          <li>
-            <NavLink
-              to="/"
-              exact
-              activeStyle={{
-                background: "#D1D0CE"
-              }}
-            >
-              Home
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/teams"
-              exact
-              activeStyle={{
-                background: "#D1D0CE"
-              }}
-            >
-              Teams
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/teams/new"
-              exact
-              activeStyle={{
-                background: "#D1D0CE"
-              }}
-            >
-              Add a team
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/players"
-              exact
-              activeStyle={{
-                background: "#D1D0CE"
-              }}
-            >
-              Players
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/players/new"
-              exact
-              activeStyle={{
-                background: "#D1D0CE"
-              }}
-            >
-              Add a player
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/teams/standings"
-              exact
-              activeStyle={{
-                background: "#D1D0CE"
-              }}
-            >
-              Standings
-            </NavLink>
-          </li>
-        </ul>
+        {isAuthenticated ? userLinks : guestLinks}
       </div>
     );
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

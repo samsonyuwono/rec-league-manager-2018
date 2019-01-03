@@ -11,7 +11,6 @@ class Login extends Component {
       username: "",
       password: "",
       loggedIn: false,
-      isLoading: false,
       errors: {}
     };
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -39,7 +38,7 @@ class Login extends Component {
   };
 
   render() {
-    const { errors, username, password, loggedIn, isLoading } = this.state;
+    const { errors, username, password, loggedIn } = this.state;
     return (
       <div>
         <div style={{ marginTop: "4rem" }} className="row">
@@ -74,7 +73,7 @@ class Login extends Component {
             onChange={this.handleOnChange}
             required
           />
-          <button type="submit-button" value="Submit" disabled={isLoading}>
+          <button type="submit-button" value="Submit">
             Submit
           </button>
         </form>
