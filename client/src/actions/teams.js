@@ -1,4 +1,4 @@
-import { resetTeamForm } from "./teamForm";
+import { resetTeamForm } from "./creators/teamForm";
 import {
   setTeams,
   addTeam,

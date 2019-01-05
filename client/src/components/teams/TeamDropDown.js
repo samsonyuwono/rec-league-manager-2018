@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updatePlayerFormData } from "../../actions/playerForm";
+import { updatePlayerFormData } from "../../actions/creators/playerForm";
 import { getTeams } from "../../actions/teams";
 import "../../assets/Forms.scss";
 

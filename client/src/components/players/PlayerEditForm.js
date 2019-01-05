@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TeamDropDown from "../teams/TeamDropDown";
 
-import { updatePlayerFormData } from "../../actions/playerForm";
+import { updatePlayerFormData } from "../../actions/creators/playerForm";
 import { fetchPlayers, editPlayer } from "../../actions/players";
 
 class PlayerEditForm extends Component {

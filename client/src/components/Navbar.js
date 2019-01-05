@@ -25,7 +25,45 @@ class Navbar extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-    debugger;
+    const guestLinks = (
+      <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
+        <li>
+          <NavLink
+            to="/"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Home
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/register"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Sign Up
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/login"
+            exact
+            activeStyle={{
+              background: "#D1D0CE"
+            }}
+          >
+            Login
+          </NavLink>
+        </li>
+      </ul>
+    );
     const userLinks = (
       <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
         <li>
@@ -114,45 +152,6 @@ class Navbar extends Component {
       </ul>
     );
 
-    const guestLinks = (
-      <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
-        <li>
-          <NavLink
-            to="/"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
-            Home
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink
-            to="/register"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
-            Sign Up
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink
-            to="/login"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
-            Login
-          </NavLink>
-        </li>
-      </ul>
-    );
     return (
       <div
         className={this.state.showMenu ? "toggle-list-wrapper" : "nav-wrapper"}

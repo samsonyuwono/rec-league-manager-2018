@@ -1,4 +1,4 @@
-import { resetPlayerForm } from "./playerForm";
+import { resetPlayerForm } from "./creators/playerForm";
 import {
   setPlayers,
   addPlayer,
