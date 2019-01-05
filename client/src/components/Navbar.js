@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Login from "./Login";
 import { connect } from "react-redux";
+import { logout } from "../actions/auth";
 import "../assets/MobileNav.scss";
 import "../assets/Navbar.scss";
 
@@ -17,9 +18,14 @@ class Navbar extends Component {
     });
   };
 
+  logout = event => {
+    event.preventDefault();
+    this.props.logout();
+  };
+
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    debugger;
     const userLinks = (
       <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
         <li>
@@ -100,6 +106,7 @@ class Navbar extends Component {
             activeStyle={{
               background: "#D1D0CE"
             }}
+            onClick={this.logout.bind(this)}
           >
             Logout
           </NavLink>
@@ -167,4 +174,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Navbar);

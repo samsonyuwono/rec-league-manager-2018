@@ -1,4 +1,13 @@
-export const GET_ERRORS = "GET_ERRORS";
-export const USER_LOADING = "USER_LOADING";
-export const SET_CURRENT_USER = "SET_CURRENT USER";
-export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const setCurrentUser = decoded => {
+  return {
+    type: "SET_CURRENT_USER",
+    payload: decoded
+  };
+};
+
+export const logoutUser = decoded => {
+  return {
+    type: "LOGOUT_USER",
+    payload: decoded
+  };
+};

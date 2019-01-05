@@ -1,5 +1,3 @@
-import { SET_CURRENT_USER } from "../actions/types";
-
 const initialState = {
   isAuthenticated: false,
   user: {}
@@ -7,10 +5,14 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_CURRENT_USER:
+    case "SET_CURRENT_USER":
       return {
         isAuthenticated: true,
         user: action.payload.username
+      };
+    case "LOGOUT_USER":
+      return {
+        isAuthenticated: false
       };
     default:
       return state;

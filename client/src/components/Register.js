@@ -28,7 +28,6 @@ class Register extends Component {
       type: "success",
       text: "You've signed up successfuly. Welcome"
     });
-    debugger;
     this.props.history.push("/login");
   };
 
