@@ -14,7 +14,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Navbar from "../components/Navbar";
 import FlashMessagesList from "../components/FlashMessagesList";
-
+import requireAuth from "../utils/requireAuth";
 import "./../assets/App.scss";
 
 class App extends Component {
@@ -28,20 +28,40 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/teams/standings" component={TeamStandings} />
-            <Route exact path="/teams/new" component={TeamForm} />
-            <Route exact path="/teams/:id" component={TeamShow} />
-            <Route exact path="/teams" component={TeamsList} />
-            <Route exact path="/teams/:id/edit" component={TeamEditForm} />
-            <Route exact path="/players/" component={PlayersList} />
-            <Route exact path="/players/new" component={PlayerForm} />
-            <Route exact path="/players/:id" component={PlayerShow} />
+            <Route
+              exact
+              path="/teams/standings"
+              component={requireAuth(TeamStandings)}
+            />
+            <Route exact path="/teams/new" component={requireAuth(TeamForm)} />
+            <Route exact path="/teams/:id" component={requireAuth(TeamShow)} />
+            <Route exact path="/teams" component={requireAuth(TeamsList)} />
+            <Route
+              exact
+              path="/teams/:id/edit"
+              component={requireAuth(TeamEditForm)}
+            />
+            <Route
+              exact
+              path="/players/"
+              component={requireAuth(PlayersList)}
+            />
+            <Route
+              exact
+              path="/players/new"
+              component={requireAuth(PlayerForm)}
+            />
+            <Route
+              exact
+              path="/players/:id"
+              component={requireAuth(PlayerShow)}
+            />
             <Route
               exact
               path="/players/:id/edit"
               Redirect
               to="/players"
-              component={PlayerEditForm}
+              component={requireAuth(PlayerEditForm)}
             />
           </Switch>
         </div>
