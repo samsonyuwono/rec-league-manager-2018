@@ -41,40 +41,35 @@ class Login extends Component {
   render() {
     const { errors, username, password, loggedIn } = this.state;
     return (
-      <div>
-        <div style={{ marginTop: "4rem" }} className="row">
-          <Link to="/" className="btn-flat waves-effect">
-            Back to home
-          </Link>
-          <p className="grey-text text-darken-1">
-            <Link to="/register">Need to register?</Link>
-          </p>
-          <h1> Login Here</h1>
-        </div>
+      <div className="form-wrapper">
+        <h1> Login Here</h1>
         <form onSubmit={this.handleOnSubmit}>
           {errors.form && (
             <div className="alert alert-danger">{errors.form}</div>
           )}
-
-          <input
-            type="username"
-            name="username"
-            placeholder="Enter username"
-            value={this.state.username}
-            onChange={this.handleOnChange}
-            error={errors.username}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter password"
-            value={this.state.password}
-            error={errors.password}
-            onChange={this.handleOnChange}
-            required
-          />
-          <button type="submit-button" value="Submit">
+          <div className="label-container">
+            <input
+              type="username"
+              name="username"
+              placeholder="Enter Username"
+              value={this.state.username}
+              onChange={this.handleOnChange}
+              error={errors.username}
+              required
+            />
+          </div>
+          <div className="label-container">
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              value={this.state.password}
+              error={errors.password}
+              onChange={this.handleOnChange}
+              required
+            />
+          </div>
+          <button className="submit-button" value="Submit">
             Submit
           </button>
         </form>

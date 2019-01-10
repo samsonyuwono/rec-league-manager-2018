@@ -35,43 +35,33 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div>
-        <div style={{ marginTop: "4rem" }} className="row">
-          <Link to="/" className="btn-flat waves-effect">
-            Back to home
-          </Link>
-          <p className="grey-text text-darken-1">
-            <Link to="/login">Already have an account?</Link>
-          </p>
-        </div>
-        <div className="form-wrapper">
-          <h1>Register Here</h1>
-          <form onSubmit={this.handleOnSubmit.bind(this)}>
-            <div className="label-container">
-              <input
-                type="username"
-                name="username"
-                placeholder="Enter Username"
-                value={this.state.username}
-                onChange={this.handleOnChange}
-                required
-              />
-            </div>
-            <div className="label-container">
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-                value={this.state.password}
-                onChange={this.handleOnChange}
-                required
-              />
-            </div>
-            <button className="submit-button" value="Submit">
-              Submit
-            </button>
-          </form>
-        </div>
+      <div className="form-wrapper">
+        <h1>Register Here</h1>
+        <form onSubmit={this.handleOnSubmit.bind(this)}>
+          <div className="label-container">
+            <input
+              type="username"
+              name="username"
+              placeholder="Enter Username"
+              value={this.state.username}
+              onChange={this.handleOnChange}
+              required
+            />
+          </div>
+          <div className="label-container">
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              value={this.state.password}
+              onChange={this.handleOnChange}
+              required
+            />
+          </div>
+          <button className="submit-button" value="Submit">
+            Submit
+          </button>
+        </form>
       </div>
     );
   }
