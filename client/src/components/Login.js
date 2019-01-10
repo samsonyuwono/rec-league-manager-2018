@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/auth";
 import { addFlashMessage } from "../actions/flashMessages";
+import "../assets/Forms.scss";
 
 class Login extends Component {
   constructor(props) {

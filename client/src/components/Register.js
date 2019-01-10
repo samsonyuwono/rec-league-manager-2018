@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/auth";
 import { addFlashMessage } from "../actions/flashMessages";
+import "../assets/Forms.scss";
 
 class Register extends Component {
   constructor(props) {
@@ -43,28 +44,34 @@ class Register extends Component {
             <Link to="/login">Already have an account?</Link>
           </p>
         </div>
-        <h1>Register Here</h1>
-        <form onSubmit={this.handleOnSubmit.bind(this)}>
-          <input
-            type="username"
-            name="username"
-            placeholder="Enter username"
-            value={this.state.username}
-            onChange={this.handleOnChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter password"
-            value={this.state.password}
-            onChange={this.handleOnChange}
-            required
-          />
-          <button type="submit-button" value="Submit">
-            Submit
-          </button>
-        </form>
+        <div className="form-wrapper">
+          <h1>Register Here</h1>
+          <form onSubmit={this.handleOnSubmit.bind(this)}>
+            <div className="label-container">
+              <input
+                type="username"
+                name="username"
+                placeholder="Enter Username"
+                value={this.state.username}
+                onChange={this.handleOnChange}
+                required
+              />
+            </div>
+            <div className="label-container">
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                value={this.state.password}
+                onChange={this.handleOnChange}
+                required
+              />
+            </div>
+            <button className="submit-button" value="Submit">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
