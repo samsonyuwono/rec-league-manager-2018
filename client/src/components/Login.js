@@ -43,7 +43,7 @@ class Login extends Component {
     return (
       <div className="form-wrapper">
         <h1> Login Here</h1>
-        <form onSubmit={this.handleOnSubmit}>
+        <form onSubmit={this.handleOnSubmit.bind(this)}>
           {errors.form && (
             <div className="alert alert-danger">{errors.form}</div>
           )}
@@ -78,7 +78,13 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.auth
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { loginUser, addFlashMessage }
 )(Login);

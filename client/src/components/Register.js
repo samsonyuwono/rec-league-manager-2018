@@ -66,6 +66,7 @@ class Register extends Component {
     );
   }
 }
+
 export default connect(
   null,
   { registerUser, addFlashMessage }
