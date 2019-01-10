@@ -4,6 +4,18 @@ const User = require("../models/User"),
   mongoose = require("mongoose"),
   jwt = require("jsonwebtoken");
 
+exports.get_all_users = (req, res) => {
+  User.find((err, players) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json(players);
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+};
+
 exports.auth_create_user = (req, res, next) => {
   User.find({ username: req.body.username })
     .exec()

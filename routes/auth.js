@@ -4,17 +4,7 @@ const express = require("express"),
   checkAuth = require("../middleware/check-auth");
 const User = require("../models/User.js");
 
-router.get("/users", (req, res) => {
-  User.find((err, players) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json(players);
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error: err
-    });
-  });
-});
+router.get("/users", AuthController.get_all_users);
 
 router.post("/register", AuthController.auth_create_user);
 

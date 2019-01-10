@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import Login from "./Login";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
 import "../assets/MobileNav.scss";
