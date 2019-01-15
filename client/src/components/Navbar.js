@@ -30,34 +30,24 @@ class Navbar extends Component {
           <NavLink
             to="/"
             exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
+            activeStyle={
+              {
+                // background: "#D1D0CE"
+              }
+            }
           >
             Home
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/register"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/register" exact>
             Sign Up
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/login"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/login" exact>
             Login
           </NavLink>
         </li>
@@ -66,85 +56,42 @@ class Navbar extends Component {
     const userLinks = (
       <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
         <li>
-          <NavLink
-            to="/"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/" exact>
             Home
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/teams"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/teams" exact>
             Teams
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/teams/new"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/teams/new" exact>
             Add a team
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/players"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/players" exact>
             Players
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/players/new"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/players/new" exact>
             Add a player
           </NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/teams/standings"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-          >
+          <NavLink to="/teams/standings" exact>
             Standings
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/logout"
-            exact
-            activeStyle={{
-              background: "#D1D0CE"
-            }}
-            onClick={this.logout.bind(this)}
-          >
+          <NavLink to="/logout" exact onClick={this.logout.bind(this)}>
             Logout
           </NavLink>
         </li>
