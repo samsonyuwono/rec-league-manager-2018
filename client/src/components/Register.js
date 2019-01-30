@@ -31,6 +31,7 @@ class Register extends Component {
   };
 
   render() {
+    debugger;
     const { errors } = this.state;
     return (
       <div className="form-wrapper">

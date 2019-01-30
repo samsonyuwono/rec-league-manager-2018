@@ -29,6 +29,13 @@ class Login extends Component {
     this.props.loginUser(this.state).then(res => this.props.history.push("/"));
   };
 
+  componentDidMount() {
+    debugger;
+    if (this.props.user.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
+
   render() {
     const { errors, username, password, loggedIn } = this.state;
     return (
