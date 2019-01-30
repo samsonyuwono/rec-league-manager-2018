@@ -23,12 +23,11 @@ class Register extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    this.props.registerUser(this.state);
     this.props.addFlashMessage({
       type: "success",
       text: "You've signed up successfuly. Welcome"
     });
-    this.props.history.push("/login");
+    this.props.registerUser(this.state, this.props.history.push("/login"));
   };
 
   render() {
@@ -36,7 +35,7 @@ class Register extends Component {
     return (
       <div className="form-wrapper">
         <h1>Register Here</h1>
-        <form onSubmit={this.handleOnSubmit.bind(this)}>
+        <form onSubmit={this.handleOnSubmit}>
           <div className="label-container">
             <input
               type="username"

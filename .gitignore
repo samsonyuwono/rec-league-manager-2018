@@ -23,3 +23,4 @@ yarn-error.log*
 dev.js
 secrets.js
 .env
+Notes.md

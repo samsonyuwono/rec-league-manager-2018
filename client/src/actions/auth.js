@@ -2,6 +2,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwtDecode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "./creators/authTypes";
+import { GET_ERRORS } from "./types";
 
 export const registerUser = (userData, history) => {
   return dispatch => {
@@ -10,21 +11,17 @@ export const registerUser = (userData, history) => {
       .then(result => {
         console.log(result);
       })
-      .catch(error => {
-        if (error.response.status === 401) {
-          alert("Registration failed. Username or password has been taken");
-        }
-      });
+      .catch(error => console.log(error));
   };
 };
 
 export const loginUser = userData => {
   return dispatch => {
-    return axios.post("/api/login", userData).then(result => {
-      console.log(result);
-      localStorage.setItem("jwtToken", result.data.token);
-      setAuthToken(result.data.token);
-      dispatch(setCurrentUser(jwtDecode(result.data.token)));
+    return axios.post("/api/login", userData).then(res => {
+      const { token } = res.data;
+      localStorage.setItem("jwtToken", token);
+      setAuthToken(token);
+      dispatch(setCurrentUser(jwtDecode(token)));
     });
   };
 };

@@ -10,7 +10,6 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      loggedIn: false,
       errors: {}
     };
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -27,14 +26,7 @@ class Login extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     const { username, password } = this.state;
-    this.setState({ loggedIn: true });
-    this.props
-      .loginUser(this.state)
-      .then(
-        res => this.props.history.push("/"),
-        err =>
-          this.setState({ errors: err.response.data.errors, loggedIn: true })
-      );
+    this.props.loginUser(this.state).then(res => this.props.history.push("/"));
   };
 
   render() {
