@@ -11,9 +11,13 @@ class TeamStandings extends Component {
   }
 
   render() {
-    const sortedTeamWins = this.props.teams.sort((a, b) => {
-      return b.wins - a.wins;
-    });
+    const currentUserId = this.props.auth.user.userId;
+    const teams = this.props.teams;
+    const userTeamStandings = teams
+      .filter(team => team.author === currentUserId)
+      .sort((a, b) => {
+        return b.wins - a.wins;
+      });
 
     const nameFormat = (cell, row) => {
       return (
@@ -30,7 +34,7 @@ class TeamStandings extends Component {
     return (
       <BootstrapTable
         key={this.props.teams._id}
-        data={this.props.teams}
+        data={userTeamStandings}
         bordered={true}
         className="tr-style"
       >
@@ -57,7 +61,8 @@ class TeamStandings extends Component {
 
 const mapStateToProps = state => {
   return {
-    teams: state.teams
+    teams: state.teams,
+    auth: state.auth
   };
 };
 
