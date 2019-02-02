@@ -13,15 +13,18 @@ class PlayersList extends Component {
   }
 
   render() {
-    const sortedPlayerHeight = this.props.players.sort((a, b) => {
-      return b.likes - a.likes;
-    });
+    const currentUserId = this.props.auth.user.userId;
+    const players = this.props.players;
+    const displayPlayers = players
+      .filter(player => player.author === currentUserId)
+      .sort((a, b) => {
+        return b.likes - a.likes;
+      })
+      .map(player => <PlayerCard key={player._id} player={player} />);
     return (
       <div className="PlayersContainer">
         <h1>Players</h1>
-        {sortedPlayerHeight.map(player => (
-          <PlayerCard key={player._id} player={player} />
-        ))}
+        {displayPlayers}
       </div>
     );
   }
@@ -29,7 +32,8 @@ class PlayersList extends Component {
 const mapStateToProps = state => {
   return {
     teams: state.teams,
-    players: state.players
+    players: state.players,
+    auth: state.auth
   };
 };
 

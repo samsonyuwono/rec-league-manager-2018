@@ -10,11 +10,10 @@ class TeamsList extends Component {
   }
 
   render() {
-    debugger;
-    const currentUserTeams = this.props.auth.user.userId;
+    const currentUserId = this.props.auth.user.userId;
     const teams = this.props.teams;
     const displayTeam = teams
-      .filter(team => team.author === currentUserTeams)
+      .filter(team => team.author === currentUserId)
       .sort((a, b) => {
         return b.wins - a.wins;
       })

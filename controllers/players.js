@@ -11,7 +11,7 @@ exports.players_get_all = (req, res) => {
 exports.players_get_user_players = (req, res) => {
   req.body.author = req.userData.userId;
   Player.find({ author: req.body.author }).then((err, players) => {
-    if (err) return res.json({ success: false, error: err });
+    if (err) return res.status(400).send(err);
     return res.json(players);
   });
 };
