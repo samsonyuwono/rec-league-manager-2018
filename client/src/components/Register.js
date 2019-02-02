@@ -27,11 +27,28 @@ class Register extends Component {
       type: "success",
       text: "You've signed up successfuly. Welcome"
     });
+    const { username, password } = this.state;
     this.props.registerUser(this.state, this.props.history.push("/login"));
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.isAuthenticated) {
+      this.props.history.push("/");
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.user.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
+
   render() {
-    debugger;
     const { errors } = this.state;
     return (
       <div className="form-wrapper">
@@ -66,7 +83,12 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.auth,
+  errors: state.errors
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { registerUser, addFlashMessage }
 )(Register);
