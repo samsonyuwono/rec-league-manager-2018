@@ -26,13 +26,23 @@ class Login extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     const { username, password } = this.state;
-    this.props.loginUser(this.state).then(res => this.props.history.push("/"));
+    this.props.loginUser(this.state);
   };
 
   componentDidMount() {
-    debugger;
     if (this.props.user.isAuthenticated) {
       this.props.history.push("/");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.isAuthenticated) {
+      this.props.history.push("/");
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
     }
   }
 

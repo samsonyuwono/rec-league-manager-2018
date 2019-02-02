@@ -10,7 +10,7 @@ router.get("/teams/error", (req, res) => {
 
 router.get("/teams", TeamsController.teams_get_all);
 
-router.get("/:id/teams", checkAuth, TeamsController.teams_get_user_teams);
+router.get("/user/teams", checkAuth, TeamsController.teams_get_user_teams);
 
 router.get("/teams/:id", checkAuth, TeamsController.teams_get_team);
 

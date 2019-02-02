@@ -4,6 +4,14 @@ import { connect } from "react-redux";
 import { logout } from "../actions/auth";
 import "../assets/MobileNav.scss";
 import "../assets/Navbar.scss";
+import FlashMessagesList from "./FlashMessagesList";
+import requireAuth from "../utils/requireAuth";
+import "./../assets/App.scss";
+import store from "../store";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "../utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "../actions/creators/authTypes";
+
 
 class Navbar extends Component {
   constructor(props) {
