@@ -24,8 +24,7 @@ class NavContainer extends Component {
     this.props.logout();
   };
   render() {
-    debugger;
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
 
     return (
       <div

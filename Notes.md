@@ -3,3 +3,5 @@
 3. Fix route for user teams and players on client side- High
 4. fix validation errors with register component- Low
 5. add faded image background to white pages- Medium
+
+Pass props into edit forms

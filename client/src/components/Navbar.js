@@ -12,7 +12,6 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/creators/authTypes";
 
-
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +30,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
     const guestLinks = (
       <ul className={this.state.showMenu ? "toggle-list" : "nav-list"}>
         <li>

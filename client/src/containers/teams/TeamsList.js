@@ -10,7 +10,11 @@ class TeamsList extends Component {
   }
 
   render() {
-    const displayTeam = this.props.teams
+    debugger;
+    const currentUserTeams = this.props.auth.user.userId;
+    const teams = this.props.teams;
+    const displayTeam = teams
+      .filter(team => team.author === currentUserTeams)
       .sort((a, b) => {
         return b.wins - a.wins;
       })
@@ -28,7 +32,8 @@ class TeamsList extends Component {
 }
 const mapStateToProps = state => {
   return {
-    teams: state.teams
+    teams: state.teams,
+    auth: state.auth
   };
 };
 
