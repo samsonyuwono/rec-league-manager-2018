@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateTeamFormData } from "../../actions/creators/teamForm";
 import { createTeam } from "../../actions/teams";
+import court from "../../assets/court.jpg";
 import "../../assets/Forms.scss";
 
 class TeamForm extends Component {
@@ -23,6 +24,7 @@ class TeamForm extends Component {
     const { name, wins, losses, logo_url } = this.props.teamFormData;
     return (
       <div className="form-wrapper">
+        <img alt="" src={court} />
         <h1>Add a Team to your League</h1>
         <form onSubmit={this.handleOnSubmit}>
           <div className="label-container">

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { updatePlayerFormData } from "../../actions/creators/playerForm";
 import { createPlayer } from "../../actions/players";
 import TeamDropDown from "../teams/TeamDropDown";
+import court from "../../assets/court.jpg";
 import "../../assets/Forms.scss";
 
 class PlayerForm extends Component {
@@ -24,6 +25,8 @@ class PlayerForm extends Component {
 
     return (
       <div className="form-wrapper">
+        <img alt="" src={court} />
+
         <h1>Add a Player to your Team</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>
           <div className="label-container">
