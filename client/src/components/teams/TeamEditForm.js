@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateTeamFormData } from "../../actions/creators/teamForm";
 import { getTeams, editTeam } from "../../actions/teams";
+import court from "../../assets/court.jpg";
 
 class TeamEditForm extends Component {
   componentWillMount() {
@@ -35,6 +36,8 @@ class TeamEditForm extends Component {
   render() {
     return (
       <div className="form-wrapper">
+        <img alt="" src={court} />
+
         <h1>Update your Team</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>
           <div className="label-container">

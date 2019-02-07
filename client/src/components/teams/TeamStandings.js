@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getTeams } from "../../actions/teams";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import court from "../../assets/court.jpg";
 import "../../assets/Table.scss";
 
 class TeamStandings extends Component {
@@ -32,29 +33,33 @@ class TeamStandings extends Component {
     };
 
     return (
-      <BootstrapTable
-        key={this.props.teams._id}
-        data={userTeamStandings}
-        bordered={true}
-        className="tr-style"
-      >
-        <TableHeaderColumn dataField="id" isKey hidden>
-          {" "}
-          ID{" "}
-        </TableHeaderColumn>
+      <div className="team-standings">
+        <img alt="" src={court} />
 
-        <TableHeaderColumn dataField="name" dataFormat={nameFormat}>
-          Team
-        </TableHeaderColumn>
+        <BootstrapTable
+          key={this.props.teams._id}
+          data={userTeamStandings}
+          bordered={true}
+          className="tr-style"
+        >
+          <TableHeaderColumn dataField="id" isKey hidden>
+            {" "}
+            ID{" "}
+          </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="wins">W</TableHeaderColumn>
+          <TableHeaderColumn dataField="name" dataFormat={nameFormat}>
+            Team
+          </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="losses">L</TableHeaderColumn>
+          <TableHeaderColumn dataField="wins">W</TableHeaderColumn>
 
-        <TableHeaderColumn dataField="%" dataFormat={percentage}>
-          %
-        </TableHeaderColumn>
-      </BootstrapTable>
+          <TableHeaderColumn dataField="losses">L</TableHeaderColumn>
+
+          <TableHeaderColumn dataField="%" dataFormat={percentage}>
+            %
+          </TableHeaderColumn>
+        </BootstrapTable>
+      </div>
     );
   }
 }

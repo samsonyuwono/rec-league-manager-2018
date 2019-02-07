@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import TeamDropDown from "../teams/TeamDropDown";
-
 import { updatePlayerFormData } from "../../actions/creators/playerForm";
 import { fetchPlayers, editPlayer } from "../../actions/players";
+import court from "../../assets/court.jpg";
 
 class PlayerEditForm extends Component {
   UNSAFE_componentWillMount() {
@@ -37,6 +37,8 @@ class PlayerEditForm extends Component {
   render() {
     return (
       <div className="form-wrapper">
+        <img alt="" src={court} />
+
         <h1>Update your Player</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>
           <div className="label-container">
