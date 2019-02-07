@@ -1,5 +1,18 @@
 .form-wrapper {
   margin-top: 4rem;
+  img {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    top: 49px;
+    height: 94vh;
+    width: 100%;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+  }
 }
 
 .alert {

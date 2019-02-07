@@ -3,4 +3,5 @@
 3. fix validation errors with register component- Low
 4. add faded image background to white pages- Medium
 
-Pass props into edit forms
+Refactor
+Pass props into edit forms so you can see data

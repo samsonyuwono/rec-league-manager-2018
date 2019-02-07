@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/auth";
 import { addFlashMessage } from "../actions/flashMessages";
+import court from "../assets/court.jpg";
 import "../assets/Forms.scss";
 
 class Login extends Component {
@@ -50,6 +51,7 @@ class Login extends Component {
     const { errors, username, password, loggedIn } = this.state;
     return (
       <div className="form-wrapper">
+        <img alt="" src={court} />
         <h1> Login Here</h1>
         <form onSubmit={this.handleOnSubmit.bind(this)}>
           {errors.form && (

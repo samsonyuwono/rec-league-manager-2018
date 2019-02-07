@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/auth";
 import { addFlashMessage } from "../actions/flashMessages";
+import court from "../assets/court.jpg";
 import "../assets/Forms.scss";
 
 class Register extends Component {
@@ -52,6 +53,7 @@ class Register extends Component {
     const { errors } = this.state;
     return (
       <div className="form-wrapper">
+      <img alt="" src={court} />
         <h1>Register Here</h1>
         <form onSubmit={this.handleOnSubmit}>
           <div className="label-container">

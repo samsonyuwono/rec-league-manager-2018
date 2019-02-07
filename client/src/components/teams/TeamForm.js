@@ -19,6 +19,7 @@ class TeamForm extends Component {
   };
 
   render() {
+    debugger;
     const { name, wins, losses, logo_url } = this.props.teamFormData;
     return (
       <div className="form-wrapper">
@@ -72,7 +73,8 @@ class TeamForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    teamFormData: state.teamFormData
+    teamFormData: state.teamFormData,
+    auth: state.auth
   };
 };
 
