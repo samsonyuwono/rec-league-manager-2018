@@ -6,7 +6,7 @@ const Home = props => {
   return (
     <div className="home-container">
       <div className="home-banner">
-        <img alt="" src={court} />
+        <img alt="" className="background-image" src={court} />
         <h1>Welcome to the Rec League App</h1>
         <p>Manage your teams and players all in one app</p>
       </div>

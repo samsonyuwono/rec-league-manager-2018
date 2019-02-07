@@ -5,6 +5,7 @@ import { getTeams } from "../../actions/teams";
 import { fetchPlayers } from "../../actions/players";
 import "../../assets/Players.scss";
 import "../../assets/Teams.scss";
+import court from "../../assets/court.jpg";
 
 class PlayersList extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class PlayersList extends Component {
       .map(player => <PlayerCard key={player._id} player={player} />);
     return (
       <div className="PlayersContainer">
+        <img alt="" className="background-image" src={court} />
         <h1>Players</h1>
         {displayPlayers}
       </div>

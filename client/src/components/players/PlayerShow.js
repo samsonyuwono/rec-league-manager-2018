@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getTeams } from "../../actions/teams";
 import { fetchPlayers } from "../../actions/players";
 import { deletePlayer } from "../../actions/players";
+import court from "../../assets/court.jpg";
 import "../../assets/Show.scss";
 
 class PlayerShow extends Component {
@@ -36,7 +37,9 @@ class PlayerShow extends Component {
       });
     };
     return (
-      <div>
+      <div className="playerShow-container">
+        <img alt="" className="background-image" src={court} />
+
         <h1> Player </h1>
         <h2>{playerShow()}</h2>
         <button className="submit-button" onClick={this.handleOnDelete}>

@@ -51,7 +51,7 @@ class Login extends Component {
     const { errors, username, password, loggedIn } = this.state;
     return (
       <div className="form-wrapper">
-        <img alt="" src={court} />
+        <img alt="" className="background-image" src={court} />
         <h1> Login Here</h1>
         <form onSubmit={this.handleOnSubmit.bind(this)}>
           {errors.form && (

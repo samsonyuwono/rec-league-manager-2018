@@ -24,7 +24,7 @@ class TeamForm extends Component {
     const { name, wins, losses, logo_url } = this.props.teamFormData;
     return (
       <div className="form-wrapper">
-        <img alt="" src={court} />
+        <img alt="" className="background-image" src={court} />
         <h1>Add a Team to your League</h1>
         <form onSubmit={this.handleOnSubmit}>
           <div className="label-container">

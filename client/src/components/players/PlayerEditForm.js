@@ -37,7 +37,7 @@ class PlayerEditForm extends Component {
   render() {
     return (
       <div className="form-wrapper">
-        <img alt="" src={court} />
+        <img alt="" className="background-image" src={court} />
 
         <h1>Update your Player</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>

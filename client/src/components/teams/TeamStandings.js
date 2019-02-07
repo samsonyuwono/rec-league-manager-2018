@@ -34,7 +34,7 @@ class TeamStandings extends Component {
 
     return (
       <div className="team-standings">
-        <img alt="" src={court} />
+        <img alt="" className="background-image" src={court} />
 
         <BootstrapTable
           key={this.props.teams._id}

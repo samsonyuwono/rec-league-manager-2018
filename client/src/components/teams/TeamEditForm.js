@@ -36,7 +36,7 @@ class TeamEditForm extends Component {
   render() {
     return (
       <div className="form-wrapper">
-        <img alt="" src={court} />
+        <img alt="" className="background-image" src={court} />
 
         <h1>Update your Team</h1>
         <form onSubmit={event => this.handleOnSubmit(event)}>

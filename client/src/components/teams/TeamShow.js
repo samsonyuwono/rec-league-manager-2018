@@ -48,7 +48,7 @@ class TeamShow extends Component {
       );
     };
     return (
-      <div>
+      <div className="teamShow-container">
         <h1> Roster </h1>
         {teamShow()}
         <PlayerForm />

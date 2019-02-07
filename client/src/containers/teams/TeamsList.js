@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import TeamCard from "../../components/teams/TeamCard";
 import { getTeams, deleteTeam } from "../../actions/teams";
 import "../../assets/Teams.scss";
+import court from "../../assets/court.jpg";
 
 class TeamsList extends Component {
   componentDidMount() {
@@ -20,6 +21,8 @@ class TeamsList extends Component {
       .map(team => <TeamCard key={team._id} team={team} />);
     return (
       <div className="TeamsContainer">
+        <img alt="" className="background-image" src={court} />
+
         <h1>Teams</h1>
         <div key={this.props} className="col-md-4">
           {displayTeam}
