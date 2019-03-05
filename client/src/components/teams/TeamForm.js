@@ -15,12 +15,12 @@ class TeamForm extends Component {
   };
 
   handleOnSubmit = event => {
+    //get user id and associate author
     event.preventDefault();
     this.props.createTeam(this.props.teamFormData);
   };
 
   render() {
-    debugger;
     const { name, wins, losses, logo_url } = this.props.teamFormData;
     return (
       <div className="form-wrapper">

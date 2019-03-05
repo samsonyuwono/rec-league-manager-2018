@@ -14,7 +14,7 @@ class TeamsList extends Component {
     const currentUserId = this.props.auth.user.userId;
     const teams = this.props.teams;
     const displayTeam = teams
-      .filter(team => team.author === currentUserId)
+      .filter(player => player.author === currentUserId)
       .sort((a, b) => {
         return b.wins - a.wins;
       })
@@ -24,6 +24,7 @@ class TeamsList extends Component {
         <img alt="" className="background-image" src={court} />
 
         <h1>Teams</h1>
+        <div className="backg" />
         <div key={this.props} className="col-md-4">
           {displayTeam}
         </div>

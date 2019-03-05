@@ -9,7 +9,7 @@ var TeamSchema = new Schema(
     logo_url: { type: String, required: true },
     players: [{ type: Schema.Types.ObjectId, ref: "Player" }],
     author: {
-      type: mongoose.Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: "Someone needs to create a team"
     }

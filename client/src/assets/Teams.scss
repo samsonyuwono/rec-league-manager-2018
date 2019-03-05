@@ -3,6 +3,7 @@
 .TeamsContainer {
   padding: 16px;
   .background-image {
+    background-image: url("court.jpg");
     position: absolute;
     z-index: -1;
     right: 0;
@@ -14,6 +15,8 @@
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(5px);
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 

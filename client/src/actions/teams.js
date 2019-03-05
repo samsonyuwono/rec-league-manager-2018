@@ -32,7 +32,6 @@ export const createTeam = (team, history) => {
       .then(team => {
         dispatch(addTeam(team));
         dispatch(resetTeamForm());
-        history.push("/teams");
       })
       .catch(error => console.log(error));
   };

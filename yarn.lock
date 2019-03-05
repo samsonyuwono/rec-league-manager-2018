@@ -6741,6 +6741,10 @@ node-gyp@^3.8.0:
     tar "^2.0.0"
     which "1"
 
+node-inspect@^1.11.5:
+  version "1.11.5"
+  resolved "https://registry.yarnpkg.com/node-inspect/-/node-inspect-1.11.5.tgz#637d1de17a77f1c15eca9acf57e759f505525e1e"
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"

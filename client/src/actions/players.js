@@ -19,8 +19,7 @@ export const fetchPlayers = () => {
 
 export const createPlayer = player => {
   let teamId = player.team_id;
-  debugger;
-  return dispatch => {
+   return dispatch => {
     return fetch(`${API_URL}/teams/${teamId}/player`, {
       method: "POST",
       headers: {
